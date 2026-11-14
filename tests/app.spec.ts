@@ -213,15 +213,16 @@ test("páginas accesibles, sin desbordamientos y con recursos locales", async ({
     expect(results.violations).toEqual([]);
   }
   if (isMobile) {
-    await page.getByRole("button", { name: "Abrir menú" }).click();
     await page
-      .getByRole("navigation")
-      .getByRole("link", { name: "Los poemas" })
+      .getByRole("navigation", { name: "Navegación de la app" })
+      .getByRole("link", { name: "Poemas", exact: true })
       .click();
     await expect(page).toHaveURL(/#\/poemas$/);
     await expect(
-      page.getByRole("button", { name: "Abrir menú" }),
-    ).toHaveAttribute("aria-expanded", "false");
+      page
+        .getByRole("navigation", { name: "Navegación de la app" })
+        .getByRole("link", { name: "Poemas", exact: true }),
+    ).toHaveAttribute("aria-current", "page");
   }
   for (const path of [
     "/materiales/seminario.pdf",

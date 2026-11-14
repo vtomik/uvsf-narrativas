@@ -1,0 +1,68 @@
+.tap-feedback {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  color: #6c8057;
+}
+
+.tap-feedback-light {
+  color: #d4dcb1;
+}
+
+.tap-ripple {
+  position: absolute;
+  top: var(--tap-y);
+  left: var(--tap-x);
+  width: 56px;
+  height: 56px;
+  margin: -28px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: color-mix(in srgb, currentColor 9%, transparent);
+  animation: tap-ripple-out 420ms cubic-bezier(0.15, 0.55, 0.2, 1) both;
+}
+
+.tap-responding {
+  animation: tap-soft-press 180ms ease-out !important;
+}
+
+@keyframes tap-ripple-out {
+  from {
+    scale: 0.28;
+    opacity: 0.38;
+  }
+  to {
+    scale: 1.25;
+    opacity: 0;
+  }
+}
+
+@keyframes tap-soft-press {
+  0% {
+    scale: 1;
+  }
+  40% {
+    scale: 0.977;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tap-feedback {
+    display: none;
+  }
+  .tap-responding {
+    animation: none !important;
+  }
+}
+
+@media print {
+  .tap-feedback {
+    display: none !important;
+  }
+}

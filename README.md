@@ -1,10 +1,13 @@
 # Polifonía del cuidado
 
-Una web de Medicina Narrativa para el seminario de la Universidad de Valparaíso, Campus San Felipe, del 20 de noviembre de 2026. Diseño editorial adaptable a celulares, ilustraciones originales en SVG y tipografías incluidas en la web.
+Una aplicación web de Medicina Narrativa pensada primero para teléfonos, para el seminario de la Universidad de Valparaíso, Campus San Felipe, del 20 de noviembre de 2026. Cuatro pantallas con navegación inferior, ilustraciones originales en SVG y tipografías incluidas en la app.
 
 ## Qué incluye
 
 - Inicio, colección de poemas y presentación del proyecto.
+- Inicio compacto, barra inferior permanente, lector a pantalla completa y paneles que se abren desde abajo. Las áreas de toque y el espacio inferior se adaptan a teléfonos con barra de gestos.
+- Respuesta visual suave al tocar controles y transiciones cortas entre pantallas, con alternativa sin movimiento.
+- Opción de añadir a la pantalla de inicio del teléfono cuando el navegador lo permite, con iconos y modo standalone. Requiere HTTPS y conexión; no ofrece uso sin internet.
 - Recorrido participativo: escena ficticia → tres mensajes no enviados → elección de una voz → reflexión específica y preguntas para conversar.
 - Los **tres poemas íntegros** de Joel Jara, extraídos del Word original: 60 versos, títulos, puntuación y estrofas conservados. Incluye el Word original para descargar.
 - Lector con tamaño de texto ampliable, lectura continua, fanzine para imprimir y PDF descargable.
@@ -49,7 +52,7 @@ npm run build
 npm run preview
 ```
 
-La carpeta publicable es `dist/`. En Netlify o Vercel con integración Git, usa `npm run build` como comando y `dist` como directorio de salida. Se incluye `netlify.toml` con estos valores.
+La carpeta publicable es `dist/`. Para generar también el ZIP listo para Webuzo ejecuta `npm run package:web` (requiere Python 3). El resultado queda en `publicacion/polifonia-del-cuidado-web.zip`. En Netlify o Vercel con integración Git, usa `npm run build` como comando y `dist` como directorio de salida. Se incluye `netlify.toml` con estos valores.
 
 Para GitHub Pages se incluye un workflow. Tras subir el código a `main`, selecciona **Settings → Pages → Source: GitHub Actions** en el repositorio. El workflow compila y publica `dist/` sin claves externas.
 
@@ -59,7 +62,7 @@ Para GitHub Pages se incluye un workflow. Tras subir el código a `main`, selecc
 npm test
 ```
 
-Compila la versión de producción y ejecuta 26 pruebas de Playwright en escritorio y celular. Verifica las tres elecciones y sus reflexiones, lectura completa, diálogos y foco, descarga del Word, generación y descarga del QR, impresión, navegación, recursos locales, ausencia de almacenamiento de respuestas, controles de movimiento y audio, anchos de 320–1440 px y accesibilidad automática con axe. Usa Chromium del sistema cuando está disponible; en otra máquina instala el navegador con `npx playwright install chromium`.
+Compila la versión de producción y ejecuta 34 pruebas de Playwright en escritorio y celular. Verifica las tres elecciones y sus reflexiones, lectura completa, diálogos y foco, descarga del Word, generación y descarga del QR, impresión, navegación, recursos locales, ausencia de almacenamiento de respuestas, controles de movimiento y audio, anchos de 320–1440 px y accesibilidad automática con axe. Usa Chromium del sistema cuando está disponible; en otra máquina instala el navegador con `npx playwright install chromium`.
 
 Para comparar **el texto exacto con el Word original**, con Python 3.10 o posterior (solo biblioteca estándar):
 
@@ -82,6 +85,8 @@ npm run build
 El script utiliza Playwright y el navegador Chromium para imprimir la web en A4. La última compilación incorpora el PDF actualizado en `dist/`. También se puede usar **Imprimir fanzine** en la página Los poemas y elegir “Guardar como PDF”.
 
 ## Archivos importantes
+
+La navegación y el feedback táctil están en `src/AppNavigation.tsx` y `src/TouchFeedback.tsx`. El diseño de teléfono está en `src/phone-app.css`; `src/install.ts` gestiona la instalación opcional. Sus pruebas están en `tests/phone.spec.ts`.
 
 La atmósfera y sus controles están en `src/Immersion.tsx` y `src/immersion.css`. El audio sintetizado está en `src/Ambience.tsx`. Sus pruebas específicas están en `tests/immersion.spec.ts`.
 

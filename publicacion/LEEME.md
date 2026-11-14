@@ -8,4 +8,4 @@ Este ZIP contiene la web ya compilada, lista para publicar. Sube el archivo a la
 
 Después visita tu dominio con `/narrativas/` al final.
 
-El archivo corresponde a la versión inmersiva: poemas originales, animaciones, ambiente sonoro opcional, QR y fanzine. Para actualizarlo después de cambiar el código, compila con `npm run build` y crea un ZIP con el contenido de `dist/`.
+El archivo corresponde a la versión app para teléfonos: navegación inferior, transiciones y respuesta al tocar, lector a pantalla completa, poemas originales, ambiente sonoro opcional, QR y fanzine. También incluye manifest e iconos para añadirla a la pantalla de inicio con HTTPS en navegadores compatibles. Para actualizarlo después de cambiar el código, ejecuta `npm run package:web`; esto compila y regenera este ZIP.

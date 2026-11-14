@@ -152,6 +152,7 @@ export function HeroArt() {
       <svg
         className="portraits"
         viewBox="0 0 600 530"
+        preserveAspectRatio="xMidYMid slice"
         fill="none"
         aria-hidden="true"
       >

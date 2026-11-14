@@ -11,8 +11,9 @@ import {
   Copy,
   Download,
   Expand,
-  Menu,
   MessageCircle,
+  Smartphone,
+  Leaf,
   Plus,
   Printer,
   QrCode,
@@ -22,7 +23,12 @@ import {
 } from "lucide-react";
 import QRCode from "qrcode";
 import collection from "./data/poems.json";
-import { BrandMark, HeroArt, VoiceArt, ThreadStar } from "./Artwork";
+import { BrandMark, HeroArt, VoiceArt } from "./Artwork";
+import { AppNavigation, AppTopBar } from "./AppNavigation";
+import { TouchFeedback } from "./TouchFeedback";
+import { useInstallPrompt } from "./install";
+import { changeScreen } from "./transitions";
+import "./phone-app.css";
 import {
   EncounterThread,
   ImmersionControls,
@@ -62,7 +68,7 @@ function useRoute() {
   const [route, setRoute] = useState(window.location.hash.slice(1) || "/");
   useEffect(() => {
     const onHash = () => {
-      setRoute(window.location.hash.slice(1) || "/");
+      changeScreen(() => setRoute(window.location.hash.slice(1) || "/"));
       window.scrollTo({ top: 0, behavior: "instant" });
     };
     window.addEventListener("hashchange", onHash);
@@ -348,74 +354,6 @@ function ShareModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-function Header({ route, onShare }: { route: string; onShare: () => void }) {
-  const [menu, setMenu] = useState(false);
-  useEffect(() => {
-    setMenu(false);
-  }, [route]);
-  const links = [
-    ["/", "Inicio"],
-    ["/experiencia", "La experiencia"],
-    ["/poemas", "Los poemas"],
-    ["/proyecto", "El proyecto"],
-  ];
-  return (
-    <header className="site-header">
-      <div className="header-inner">
-        <a
-          className="brand"
-          href="#/"
-          aria-label="Polifonía del cuidado, inicio"
-        >
-          <BrandMark />
-          <span>
-            POLIFONÍA<span>DEL CUIDADO</span>
-          </span>
-        </a>
-        <nav
-          id="mobile-nav"
-          aria-label="Navegación principal"
-          className={menu ? "is-open" : ""}
-        >
-          {links.map(([path, label]) => (
-            <a
-              key={path}
-              href={`#${path}`}
-              className={
-                route === path || (path !== "/" && route.startsWith(path))
-                  ? "active"
-                  : ""
-              }
-              aria-current={
-                route === path || (path !== "/" && route.startsWith(path))
-                  ? "page"
-                  : undefined
-              }
-            >
-              {label}
-            </a>
-          ))}
-        </nav>
-        <div className="header-actions">
-          <button className="share-button" onClick={onShare}>
-            <span>Compartir</span>
-            <ArrowUpRight size={17} />
-          </button>
-          <button
-            className="icon-button menu-toggle"
-            aria-expanded={menu}
-            aria-controls="mobile-nav"
-            aria-label={menu ? "Cerrar menú" : "Abrir menú"}
-            onClick={() => setMenu(!menu)}
-          >
-            {menu ? <X /> : <Menu />}
-          </button>
-        </div>
-      </div>
-    </header>
-  );
-}
-
 function VoiceCard({ voice, onRead }: { voice: Voice; onRead: () => void }) {
   const preview = voice.body
     .split("\n\n")[0]
@@ -444,135 +382,80 @@ function VoiceCard({ voice, onRead }: { voice: Voice; onRead: () => void }) {
   );
 }
 
-function Home({ onRead }: { onRead: (voice: Voice) => void }) {
+function Home({
+  onInstall,
+  installed,
+}: {
+  onInstall: () => void;
+  installed: boolean;
+}) {
   return (
-    <>
-      <section className="hero page-width">
-        <div className="hero-copy">
-          <Label>MEDICINA NARRATIVA · POESÍA Y ESCUCHA</Label>
-          <h1>
-            Lo que no cabe
-            <br />
-            en la{" "}
-            <em>
-              ficha
-              <br className="desktop-break" /> clínica.
-            </em>
-          </h1>
-          <p className="hero-description">
-            Detrás de un diagnóstico hay más de una historia.
-            <br className="wide-break" /> Haz una pausa. Acércate a tres voces
-            que viven
-            <br className="wide-break" /> un mismo momento de maneras distintas.
-          </p>
-          <a className="button primary hero-cta" href="#/experiencia">
-            Entrar en la experiencia <ArrowUpRight size={19} />
-          </a>
-          <div className="hero-details">
-            <span>
-              <Clock3 size={14} /> 4 minutos para escuchar
-            </span>
-            <i />
-            <span>Sin registro. A tu ritmo.</span>
-          </div>
-        </div>
+    <div className="app-home">
+      <div className="app-greeting">
+        <span className="app-kicker">TU PAUSA DE HOY</span>
+        <span className="app-time">
+          <Clock3 size={13} /> 4 min
+        </span>
+      </div>
+      <h1>
+        Lo que no cabe
+        <br />
+        en la <em>ficha clínica.</em>
+      </h1>
+      <p className="app-home-description">
+        Una historia. Tres voces.
+        <br />
+        Un momento para mirar desde otro lugar.
+      </p>
+      <div className="app-story-card">
         <HeroArt />
-        <div className="hero-footnote">
-          <span className="hero-footnote-left">
-            <ThreadStar className="tiny-sun" /> UNA HISTORIA. TRES MIRADAS.
-            NINGUNA SOBRA.
-          </span>
-          <a
-            href="#voces"
-            onClick={(e) => {
-              e.preventDefault();
-              document
-                .getElementById("voces")
-                ?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            Desliza para descubrir <span>↓</span>
+        <div className="app-story-actions">
+          <div className="app-story-meta">
+            <span className="voice-dots">
+              <i />
+              <i />
+              <i />
+            </span>
+            <span>3 perspectivas · A tu ritmo</span>
+            <span className="story-badge">EXPERIENCIA</span>
+          </div>
+          <a href="#/experiencia" className="button primary app-start">
+            Entrar en la experiencia <ArrowRight size={20} />
           </a>
         </div>
-      </section>
-      <section className="voices-section" id="voces">
-        <div className="page-width">
-          <div className="section-heading">
-            <div>
-              <Label>01 / LAS VOCES</Label>
-              <h2>
-                El mismo instante.
-                <br />
-                <em>Tres mundos por dentro.</em>
-              </h2>
-            </div>
-            <p>
-              Una paciente, su hija y un médico.
-              <br />
-              Lo que sienten no siempre es lo que dicen.
-              <br />
-              <a className="text-link" href="#/poemas">
-                Explorar los poemas <ArrowUpRight size={16} />
-              </a>
-            </p>
-          </div>
-          <div className="voice-grid">
-            {voices.map((v) => (
-              <VoiceCard key={v.id} voice={v} onRead={() => onRead(v)} />
-            ))}
-          </div>
-          <p className="voices-postscript">
-            <span />
-            Poemas de Joel Jara · «Mientras todavía me recuerdes» · 2026
-            <span />
-          </p>
-        </div>
-      </section>
-      <section className="invitation-section">
-        <div className="page-width invitation-inner">
-          <div>
-            <Label light>02 / MÁS ALLÁ DEL DIAGNÓSTICO</Label>
-            <h2>
-              Quizás el cuidado
-              <br />
-              empieza con una
-              <br />
-              <em>forma de escuchar.</em>
-            </h2>
-            <a href="#/proyecto" className="button light-button">
-              Descubre el proyecto <ArrowUpRight size={18} />
-            </a>
-          </div>
-          <div className="invitation-aside">
-            <BrandMark />
-            <p>
-              No buscamos una voz que tenga razón.
-              <br />
-              Buscamos espacio para escucharlas todas.
-            </p>
-            <div className="invitation-rule" />
-            <span>
-              Una propuesta desde la
-              <br />
-              Medicina Basada en Narrativas.
-            </span>
-          </div>
-        </div>
-      </section>
-      <section className="takeaway page-width">
-        <BookOpen size={30} strokeWidth={1} />
-        <div>
-          <h3>Una lectura para llevar contigo.</h3>
-          <p>
-            Tres poemas, un encuentro. Guarda el texto original o imprime el
-            fanzine.
-          </p>
-        </div>
-        <a href="#/poemas" className="text-link">
-          Abrir la colección <ArrowUpRight size={17} />
+      </div>
+      <div className="app-shortcuts">
+        <a href="#/poemas">
+          <span className="shortcut-icon">
+            <BookOpen size={21} strokeWidth={1.4} />
+          </span>
+          <span>
+            <strong>Los poemas</strong>
+            <small>Lee a tu ritmo</small>
+          </span>
+          <ChevronRight size={17} />
         </a>
-      </section>
-    </>
+        <a href="#/proyecto">
+          <span className="shortcut-icon">
+            <Leaf size={21} strokeWidth={1.4} />
+          </span>
+          <span>
+            <strong>El proyecto</strong>
+            <small>Conoce su sentido</small>
+          </span>
+          <ChevronRight size={17} />
+        </a>
+      </div>
+      {!installed && (
+        <button className="app-install" onClick={onInstall}>
+          <Smartphone size={16} /> Añadir a pantalla de inicio{" "}
+          <Plus size={15} />
+        </button>
+      )}
+      <p className="app-home-privacy">
+        <ShieldCheck size={12} /> Sin registro. Solo tú y las historias.
+      </p>
+    </div>
   );
 }
 
@@ -689,7 +572,7 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
         : "neutral";
   const names = ["La escena", "Las voces", "Tu elección", "La reflexión"];
   const go = (next: number) => {
-    setStep(next);
+    changeScreen(() => setStep(next), next < step ? "back" : "forward");
     window.scrollTo({ top: 0, behavior: "instant" });
   };
   useEffect(() => {
@@ -1223,34 +1106,6 @@ function Project() {
   );
 }
 
-function Footer({ onShare }: { onShare: () => void }) {
-  return (
-    <footer className="site-footer">
-      <div className="page-width footer-top">
-        <a className="brand" href="#/">
-          <BrandMark />
-          <span>
-            POLIFONÍA<span>DEL CUIDADO</span>
-          </span>
-        </a>
-        <p>
-          Una invitación a escuchar
-          <br />
-          lo que no siempre se dice.
-        </p>
-        <button className="text-link" onClick={onShare}>
-          Comparte la experiencia <QrCode size={18} />
-        </button>
-      </div>
-      <div className="page-width footer-bottom">
-        <span>Universidad de Valparaíso · Campus San Felipe</span>
-        <span>MEDICINA NARRATIVA / 2026</span>
-        <span>Hecho para leer. Pensado para sentir.</span>
-      </div>
-    </footer>
-  );
-}
-
 function PrintFanzine() {
   return (
     <div className="print-fanzine" aria-hidden="true">
@@ -1281,6 +1136,12 @@ export default function App() {
   const route = useRoute();
   const [reader, setReader] = useState<Voice | null>(null);
   const [sharing, setSharing] = useState(false);
+  const [installing, setInstalling] = useState(false);
+  const { installed, isIOS, promptInstall } = useInstallPrompt();
+  const install = async () => {
+    const result = await promptInstall();
+    if (result === "unavailable") setInstalling(true);
+  };
   useEffect(() => {
     setReader(null);
     setSharing(false);
@@ -1311,12 +1172,12 @@ export default function App() {
         Saltar al contenido
       </a>
       <div
-        className={`app-shell ${route === "/experiencia" ? "is-experience" : ""}`}
+        className={`app-shell mobile-app ${route === "/experiencia" ? "is-experience" : ""}`}
       >
-        <Header route={route} onShare={() => setSharing(true)} />
+        <AppTopBar onShare={() => setSharing(true)} />
         <main id="main" tabIndex={-1}>
           {route === "/" ? (
-            <Home onRead={setReader} />
+            <Home onInstall={install} installed={installed} />
           ) : route === "/experiencia" ? (
             <Experience onRead={setReader} />
           ) : route === "/poemas" ? (
@@ -1336,7 +1197,7 @@ export default function App() {
             </div>
           )}
         </main>
-        <Footer onShare={() => setSharing(true)} />
+        <AppNavigation route={route} />
       </div>
       {reader && (
         <PoemReader
@@ -1346,6 +1207,63 @@ export default function App() {
         />
       )}{" "}
       {sharing && <ShareModal onClose={() => setSharing(false)} />}
+      {installing && (
+        <Modal
+          title="Añadir a pantalla de inicio"
+          onClose={() => setInstalling(false)}
+          className="install-sheet"
+        >
+          <div className="sheet-handle" aria-hidden="true" />
+          <Smartphone size={34} strokeWidth={1.2} />
+          <Label>SIEMPRE A MANO</Label>
+          <h2>
+            Un lugar en
+            <br />
+            <em>tu teléfono.</em>
+          </h2>
+          <p>Abre la experiencia como una app desde tu pantalla de inicio.</p>
+          <ol>
+            {isIOS ? (
+              <>
+                <li>
+                  Abre esta web en <strong>Safari</strong>.
+                </li>
+                <li>
+                  Toca <strong>Compartir</strong> en la barra del navegador.
+                </li>
+                <li>
+                  Elige <strong>Añadir a pantalla de inicio</strong>.
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  Abre esta web en <strong>Chrome</strong> o un navegador
+                  compatible.
+                </li>
+                <li>
+                  Toca el menú del navegador <strong>⋮</strong>.
+                </li>
+                <li>
+                  Elige <strong>Instalar aplicación</strong> o{" "}
+                  <strong>Añadir a pantalla de inicio</strong>.
+                </li>
+              </>
+            )}
+          </ol>
+          <p className="install-hint">
+            La instalación depende de tu navegador y de que la web esté
+            publicada con HTTPS. La app necesita conexión para abrirse.
+          </p>
+          <button
+            className="button primary"
+            onClick={() => setInstalling(false)}
+          >
+            Entendido <Check size={17} />
+          </button>
+        </Modal>
+      )}
+      <TouchFeedback />
       <PrintFanzine />
     </>
   );

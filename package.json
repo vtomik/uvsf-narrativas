@@ -10,7 +10,8 @@
     "test": "npm run build && playwright test",
     "verify:poems": "python3 scripts/verify-poems.py",
     "format": "prettier --write src tests scripts/*.mjs *.ts *.json *.md",
-    "export:fanzine": "node scripts/export-fanzine.mjs"
+    "export:fanzine": "node scripts/export-fanzine.mjs",
+    "package:web": "npm run build && python3 scripts/package-site.py"
   },
   "engines": {
     "node": ">=22.12.0"
