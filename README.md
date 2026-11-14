@@ -19,6 +19,8 @@ El sonido comienza apagado. Si el sistema tiene activado el movimiento reducido,
 
 ## Publicarla sin programar
 
+**[Descargar el ZIP listo para Webuzo](https://github.com/vtomik/uvsf-narrativas/raw/refs/heads/main/publicacion/polifonia-del-cuidado-web.zip)**. También está en la carpeta [`publicacion/`](publicacion/LEEME.md) de este repositorio.
+
 Si recibiste `polifonia-del-cuidado-web.zip`:
 
 1. Descomprime el ZIP. La carpeta resultante contiene `index.html`, `assets/` y `materiales/`.
