@@ -1,0 +1,71 @@
+@page {
+  size: A4;
+  margin: 18mm 20mm;
+}
+@media print {
+  :root,
+  body {
+    background: white !important;
+    color: #000 !important;
+  }
+  .app-shell,
+  .modal,
+  .skip-link {
+    display: none !important;
+  }
+  .print-fanzine {
+    display: block !important;
+    color: #000;
+    font-family: Georgia, serif;
+  }
+  .print-fanzine > header {
+    break-after: page;
+    padding-top: 22mm;
+  }
+  .print-fanzine h1 {
+    font-size: 34pt;
+    line-height: 1.05;
+    margin: 0 0 12mm;
+  }
+  .print-fanzine > header > h2 {
+    font-size: 18pt;
+    margin: 18mm 0 8mm;
+  }
+  .print-fanzine > header > p {
+    font-size: 11pt;
+    line-height: 1.6;
+    margin: 3mm 0;
+    max-width: 145mm;
+  }
+  .print-fanzine > article {
+    break-after: page;
+    padding-top: 4mm;
+  }
+  .print-fanzine > article > h2 {
+    font-size: 21pt;
+    margin: 0 0 8mm;
+    line-height: 1.15;
+    max-width: 145mm;
+  }
+  .print-fanzine .poem-body {
+    font-family: Georgia, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    letter-spacing: 0;
+  }
+  .print-fanzine .poem-body p {
+    margin-bottom: 5mm;
+    white-space: pre-wrap;
+    break-inside: avoid;
+  }
+  .print-fanzine > article:last-of-type {
+    break-after: auto;
+  }
+  .print-fanzine > footer {
+    font-size: 8pt;
+    line-height: 1.5;
+    border-top: 1px solid #aaa;
+    padding-top: 5mm;
+    margin-top: 10mm;
+  }
+}

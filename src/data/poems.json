@@ -1,0 +1,52 @@
+{
+  "title": "MIENTRAS TODAVÍA ME RECUERDES",
+  "context": [
+    "La Paciente tiene 68 años. Durante los últimos meses ha comenzado a olvidar nombres, perder objetos y confundirse en lugares que antes conocía perfectamente.",
+    "Su hija, la acompaña a una consulta médica. Allí reciben un diagnóstico que cambiará sus vidas: enfermedad de Alzheimer.",
+    "Al terminar la consulta, La paciente pregunta:",
+    "Doctor, ¿todavía podré hacer las cosas por mí misma?",
+    "Su hija guarda silencio. El médico piensa cuidadosamente su respuesta.",
+    "Los tres tienen miedo, pero no le temen a lo mismo."
+  ],
+  "voices": [
+    {
+      "id": "paciente",
+      "number": "01",
+      "role": "La paciente",
+      "name": "Elena · 68 años",
+      "originalHeading": "Poema I – No me olviden antes de tiempo – El Paciente",
+      "title": "No me olviden antes de tiempo",
+      "body": "Ayer olvidé dónde estaban mis llaves,\nhoy, el nombre de una vieja canción.\nMe dicen que mañana olvidaré más cosas,\npero nadie pregunta qué recuerda mi corazón.\n\nMi hija me mira con ojos de miedo,\nme toma la mano al cruzar la ciudad.\nNo sabe que a veces me duele su ayuda,\nporque siento que pierdo mi libertad.\n\nEl doctor me habla de días futuros,\nde nombres, recuerdos y confusión.\nYo solo quisiera vivir este instante,\nsin ser prisionera de mi condición.\n\nNo quiero ser carga, tampoco un recuerdo,\nni que otros decidan lo que debo hacer.\nSi un día mi mente se pierde en silencio,\nno significa que deje de ser.\n\nPorque sigo siendo la misma de siempre,\naunque el tiempo me empiece a borrar.\nNo me quiten la vida que tengo,\npor miedo a lo que pueda pasar.",
+      "message": "No quiero ser carga, tampoco un recuerdo,\nni que otros decidan lo que debo hacer.\nSi un día mi mente se pierde en silencio,\nno significa que deje de ser.",
+      "theme": "Seguir siendo yo",
+      "concern": "Autonomía e identidad",
+      "question": "¿Y si cuidar también significa dejar elegir?"
+    },
+    {
+      "id": "cuidadora",
+      "number": "02",
+      "role": "La cuidadora",
+      "name": "Su hija",
+      "originalHeading": "Poema II – Yo También tengo miedo – El Cuidador",
+      "title": "Yo También tengo miedo",
+      "body": "Mi madre pregunta por cosas pequeñas,\nlas llaves, la fecha, qué día será.\nYo respondo paciente, sonrío y la abrazo,\naunque sé que mañana volverá a preguntar.\n\nLa veo enojarse cuando quiero ayudarla,\nme dice que sola aún puede seguir.\nNo sabe las noches que paso despierta,\npensando qué haría si no vuelve a venir.\n\nRecuerdo sus manos cuidando las mías,\nlas veces que estuvo cuando yo caí.\nAhora quisiera devolverle esos años,\npero a veces me canso y me avergüenzo de mí.\n\nEl doctor me aconseja que tenga paciencia,\nque cuide su mundo, que escuche su voz.\nPero nadie me enseña a vivir con el miedo,\nni a encontrar un descanso sin sentirme peor.\n\nNo quiero quitarle los días que tiene,\nni ser quien le impida volver a salir.\nPero ¿cómo se cuida a quien tanto se ama,\nsi dejarla vivir también puede dolerme a mí?",
+      "message": "El doctor me aconseja que tenga paciencia,\nque cuide su mundo, que escuche su voz.\nPero nadie me enseña a vivir con el miedo,\nni a encontrar un descanso sin sentirme peor.",
+      "theme": "Cuidar sin perderme",
+      "concern": "Amor, miedo y cansancio",
+      "question": "¿Quién cuida a la persona que cuida?"
+    },
+    {
+      "id": "medico",
+      "number": "03",
+      "role": "El médico",
+      "name": "El profesional de salud",
+      "originalHeading": "Poema III – Lo que no dice el diagnostico – El Médico",
+      "title": "Lo que no dice el diagnostico",
+      "body": "Sobre mi escritorio descansan los exámenes,\npalabras precisas, un nombre, una explicación.\nPero enfrente hay una mujer que me mira,\nesperando algo más que mi conclusión.\n\nLe hablo de memoria, de cambios y tiempo,\nde lo que sabemos y lo que vendrá.\nSu hija pregunta cómo protegerla,\ny Elena, si aún puede elegir su libertad.\n\nQuisiera entregarles respuestas sencillas,\ndecirles que todo se puede evitar.\nPero hay enfermedades que no dan certezas,\ny prometer lo imposible también es fallar.\n\nHe aprendido a leer muchos síntomas,\na distinguir lo urgente de lo que puede esperar.\nPero hay silencios que no están en los libros,\ny preguntas que ninguna prueba puede aclarar.\n\nNo debo decidir una vida por otros,\nni abandonar a quien necesita orientación.\nMi deber no es solamente tratar la enfermedad,\nsino escuchar a la persona detrás del diagnóstico.",
+      "message": "He aprendido a leer muchos síntomas,\na distinguir lo urgente de lo que puede esperar.\nPero hay silencios que no están en los libros,\ny preguntas que ninguna prueba puede aclarar.",
+      "theme": "Escuchar más allá",
+      "concern": "Responsabilidad e incertidumbre",
+      "question": "¿Qué necesita escuchar quien espera una respuesta?"
+    }
+  ]
+}

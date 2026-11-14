@@ -1,0 +1,98 @@
+# Polifonía del cuidado
+
+Una web de Medicina Narrativa para el seminario de la Universidad de Valparaíso, Campus San Felipe, del 20 de noviembre de 2026. Diseño editorial adaptable a celulares, ilustraciones originales en SVG y tipografías incluidas en la web.
+
+## Qué incluye
+
+- Inicio, colección de poemas y presentación del proyecto.
+- Recorrido participativo: escena ficticia → tres mensajes no enviados → elección de una voz → reflexión específica y preguntas para conversar.
+- Los **tres poemas íntegros** de Joel Jara, extraídos del Word original: 60 versos, títulos, puntuación y estrofas conservados. Incluye el Word original para descargar.
+- Lector con tamaño de texto ampliable, lectura continua, fanzine para imprimir y PDF descargable.
+- Generación de QR en el navegador: permite ingresar la dirección publicada y descargar una imagen PNG para el stand.
+- Navegación por teclado, diálogos accesibles, contraste revisado y respeto por la preferencia de movimiento reducido.
+- Experiencia inmersiva con luz y partículas en movimiento, hilos que conectan las voces, colores según la perspectiva, transiciones entre escenas y una revelación final animada.
+- Ambiente sonoro suave y opcional, generado en el navegador: solo se activa con un clic. Controles para pausar el movimiento y usar pantalla completa cuando el navegador lo permite.
+
+No necesita servidor de aplicación, base de datos, claves ni registro. No usa analítica, cookies ni almacenamiento de elecciones. Los recursos y las fuentes se sirven desde el propio sitio.
+
+El sonido comienza apagado. Si el sistema tiene activado el movimiento reducido, las animaciones también comienzan pausadas. Los controles permiten cambiarlo durante la visita, sin guardar preferencias. Al ocultar la pestaña se suspenden el sonido y las animaciones; al salir del recorrido se libera el motor de audio.
+
+## Publicarla sin programar
+
+Si recibiste `polifonia-del-cuidado-web.zip`:
+
+1. Descomprime el ZIP. La carpeta resultante contiene `index.html`, `assets/` y `materiales/`.
+2. En [Netlify Drop](https://app.netlify.com/drop), arrastra **la carpeta descomprimida completa**. Sigue los pasos del servicio para conservar la publicación.
+3. Abre la dirección pública que entrega Netlify. En la web, pulsa **Compartir**, comprueba la dirección y descarga el QR.
+
+También puedes subir el **contenido** de esa carpeta a `public_html` en cualquier hosting estático. Mantén juntos `index.html`, `assets/` y `materiales/`. No subas `src/` ni `node_modules/` como sitio público.
+
+El sitio funciona en la raíz de un dominio o en una subcarpeta. Las rutas usan `#/experiencia`, `#/poemas` y `#/proyecto`, por lo que no necesitan reglas especiales del hosting. Para probarlo localmente, usa un servidor HTTP; abrir el HTML con doble clic (`file://`) no es el flujo soportado.
+
+**El paquete está preparado para publicar. Crearlo no publica el sitio ni genera una URL pública.** El QR debe apuntar a la URL pública definitiva, nunca a `localhost`.
+
+## Desarrollar
+
+Requiere Node.js 22.12 o posterior y npm.
+
+```sh
+npm ci
+npm run dev
+```
+
+Para compilar y revisar la versión que se publicará:
+
+```sh
+npm run build
+npm run preview
+```
+
+La carpeta publicable es `dist/`. En Netlify o Vercel con integración Git, usa `npm run build` como comando y `dist` como directorio de salida. Se incluye `netlify.toml` con estos valores.
+
+Para GitHub Pages se incluye un workflow. Tras subir el código a `main`, selecciona **Settings → Pages → Source: GitHub Actions** en el repositorio. El workflow compila y publica `dist/` sin claves externas.
+
+## Verificaciones
+
+```sh
+npm test
+```
+
+Compila la versión de producción y ejecuta 26 pruebas de Playwright en escritorio y celular. Verifica las tres elecciones y sus reflexiones, lectura completa, diálogos y foco, descarga del Word, generación y descarga del QR, impresión, navegación, recursos locales, ausencia de almacenamiento de respuestas, controles de movimiento y audio, anchos de 320–1440 px y accesibilidad automática con axe. Usa Chromium del sistema cuando está disponible; en otra máquina instala el navegador con `npx playwright install chromium`.
+
+Para comparar **el texto exacto con el Word original**, con Python 3.10 o posterior (solo biblioteca estándar):
+
+```sh
+npm run verify:poems
+```
+
+La comparación incluye contexto, títulos, estrofas, versos y los fragmentos usados como mensajes no enviados. Las preguntas y reflexiones son textos de acompañamiento, separados de los poemas.
+
+## Fanzine PDF
+
+`public/materiales/fanzine.pdf` es la versión imprimible de la colección. Para regenerarla después de un cambio deliberado de contenido o diseño de impresión:
+
+```sh
+npm run build
+npm run export:fanzine
+npm run build
+```
+
+El script utiliza Playwright y el navegador Chromium para imprimir la web en A4. La última compilación incorpora el PDF actualizado en `dist/`. También se puede usar **Imprimir fanzine** en la página Los poemas y elegir “Guardar como PDF”.
+
+## Archivos importantes
+
+La atmósfera y sus controles están en `src/Immersion.tsx` y `src/immersion.css`. El audio sintetizado está en `src/Ambience.tsx`. Sus pruebas específicas están en `tests/immersion.spec.ts`.
+
+| Archivo               | Función                                             |
+| --------------------- | --------------------------------------------------- |
+| `src/data/poems.json` | Texto de los poemas y contexto, extraídos del Word. |
+| `src/App.tsx`         | Páginas, recorrido, reflexiones, lector y QR.       |
+| `src/Artwork.tsx`     | Ilustraciones vectoriales originales.               |
+| `src/styles.css`      | Diseño y adaptación a diferentes pantallas.         |
+| `src/print.css`       | Composición A4 del fanzine.                         |
+| `public/materiales/`  | Word original, documento del seminario y fanzine.   |
+| `tests/app.spec.ts`   | Pruebas de comportamiento y accesibilidad.          |
+
+La situación clínica de la web sigue el documento de poemas: una paciente de 68 años y un diagnóstico de Alzheimer. El PDF del seminario presenta una escena más general de espera de resultados; se tomó el documento poético como fuente de la escena concreta. La fundamentación en Pimentel y Ricoeur y los roles del equipo provienen de la propuesta del seminario.
+
+Los textos originales y documentos corresponden al material proporcionado por el equipo. Las tipografías son DM Sans y Cormorant Garamond, distribuidas bajo SIL Open Font License; sus licencias se incluyen en `public/licencias/`. Los iconos son Lucide, bajo ISC.
