@@ -20,9 +20,75 @@
     />
     <title>Polifonía del cuidado · Tres miradas, una historia</title>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <style>
+      body {
+        margin: 0;
+        background: #f7f8fc;
+      }
+      .boot-screen {
+        min-height: 100svh;
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        padding: 24px;
+        box-sizing: border-box;
+        text-align: center;
+        color: #283c83;
+        font-family: Georgia, serif;
+        background:
+          radial-gradient(ellipse at 50% 38%, #e8edff, transparent 65%), #f7f8fc;
+      }
+      .boot-mark {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 28px;
+        border: 1px solid #c0cbed;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+      }
+      .boot-mark::before {
+        content: "✧";
+        font-size: 38px;
+        animation: boot-breathe 1.8s ease-in-out infinite alternate;
+      }
+      .boot-screen p {
+        font-size: clamp(28px, 6vw, 42px);
+        margin: 0 0 16px;
+      }
+      .boot-screen span {
+        font:
+          10px/1.8 system-ui,
+          sans-serif;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      @keyframes boot-breathe {
+        from {
+          opacity: 0.4;
+          transform: scale(0.88);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .boot-mark::before {
+          animation: none;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="boot-screen" role="status" aria-live="polite">
+        <div class="boot-mark" aria-hidden="true"></div>
+        <p>Polifonía del cuidado</p>
+        <span>Preparando un espacio para escuchar</span>
+        <noscript>Activa JavaScript para recorrer la experiencia.</noscript>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

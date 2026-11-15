@@ -1,0 +1,395 @@
+/* Quiet intervals, layered light and a question that arrives as one thought. */
+.experience-atmosphere .memory-mote {
+  width: var(--mote-size);
+  height: var(--mote-size);
+  background: var(--atmosphere);
+  box-shadow: 0 0 12px rgba(var(--glow-rgb), 0.4);
+  will-change: auto;
+}
+.experience-atmosphere .memory-mote:nth-of-type(7n) {
+  border: 1px solid rgba(var(--glow-rgb), 0.5);
+  background: transparent;
+  box-shadow: 0 0 18px rgba(var(--glow-rgb), 0.14);
+}
+@keyframes memory-drift {
+  from {
+    transform: translate3d(-8px, 12px, 0);
+    opacity: 0.12;
+  }
+  55% {
+    opacity: 0.55;
+  }
+  to {
+    transform: translate3d(18px, calc(-1 * var(--mote-travel)), 0);
+    opacity: 0.24;
+  }
+}
+.passage-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  background: radial-gradient(ellipse at 50% 42%, #273e53f5, #101d39fa 75%);
+  color: #eef0ff;
+  text-align: center;
+  pointer-events: none;
+  animation: passage-arrive 180ms ease-out both;
+}
+.passage-screen > .small-caps {
+  color: #b8c7f2;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+}
+.passage-screen > p {
+  font-family: var(--font-display, "Cormorant Garamond", Georgia, serif);
+  font-size: clamp(28px, 6vw, 44px);
+  line-height: 1.12;
+  max-width: 420px;
+  margin: 20px 0 28px;
+}
+.passage-symbol {
+  width: 106px;
+  height: 106px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  margin-bottom: 36px;
+  color: #cfdbff;
+}
+.passage-symbol > span {
+  position: absolute;
+  inset: 0;
+  border: 1px solid #c3d0ff40;
+  border-radius: 50%;
+  animation: passage-orbit 2.5s ease-in-out infinite alternate;
+}
+.passage-symbol > span:nth-child(2) {
+  inset: 13px;
+  border-color: #c3d0ff60;
+  animation-delay: -0.8s;
+}
+.passage-symbol > span:nth-child(3) {
+  inset: -15px;
+  border-style: dotted;
+  opacity: 0.45;
+  animation-delay: -1.6s;
+}
+.passage-line {
+  width: 54px;
+  height: 1px;
+  background: #afc1ff;
+  transform-origin: left;
+  animation: passage-line 800ms ease-out both;
+}
+@keyframes passage-arrive {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes passage-orbit {
+  from {
+    transform: scale(0.9) rotate(-12deg);
+    opacity: 0.45;
+  }
+  to {
+    transform: scale(1.06) rotate(12deg);
+    opacity: 1;
+  }
+}
+@keyframes passage-line {
+  from {
+    transform: scaleX(0.15);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.is-experience .reflection-question {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 2px 24px 2px 24px;
+  background: linear-gradient(
+    125deg,
+    rgba(var(--glow-rgb), 0.12),
+    rgba(var(--glow-rgb), 0.025)
+  );
+}
+.reflection-question:before {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 1px;
+  background: currentColor;
+  color: var(--atmosphere);
+  margin: 0 auto 24px;
+  transform-origin: left;
+}
+.reflection-question:after {
+  content: "?";
+  position: absolute;
+  z-index: -1;
+  right: -8px;
+  bottom: -55px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 240px;
+  line-height: 1;
+  color: rgba(var(--glow-rgb), 0.09);
+  pointer-events: none;
+}
+.is-experience .reflection-question h2 {
+  max-width: 660px;
+  text-wrap: balance;
+  line-height: 1.15;
+}
+.is-experience .reflection-question p {
+  max-width: 580px;
+  line-height: 1.8;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .is-experience .reflection-head > h1 {
+    animation: thought-arrive 750ms 60ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .is-experience .reflection-question {
+    animation: thought-arrive 750ms 240ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .reflection-question:before {
+    animation: passage-line 900ms 350ms ease-out both;
+  }
+  .reflection-reading {
+    animation: thought-arrive 750ms 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .is-experience .message-panel {
+    animation: message-arrive 550ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .reflection-accordion > p {
+    animation: thought-arrive 300ms ease-out both;
+  }
+  @keyframes thought-arrive {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes message-arrive {
+    from {
+      opacity: 0.5;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+@media (max-width: 700px) {
+  .experience-atmosphere .memory-mote:nth-of-type(2n) {
+    display: block;
+  }
+  .experience-atmosphere .memory-mote:nth-of-type(3n) {
+    display: none;
+  }
+  .passage-symbol {
+    width: 82px;
+    height: 82px;
+  }
+  .reflection-question:after {
+    font-size: 190px;
+    bottom: -35px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .passage-screen,
+  .passage-screen *,
+  .reflection-question:before {
+    animation: none !important;
+  }
+}
+@media print {
+  .passage-screen {
+    display: none;
+  }
+}
+
+.reflection-reading,
+.reflection-foundation {
+  max-width: 900px;
+  margin: 64px auto;
+  color: #c5cdea;
+}
+.reflection-section-heading {
+  max-width: 560px;
+  margin-bottom: 32px;
+}
+.reflection-reading h2,
+.reflection-foundation h2 {
+  color: #f0efff;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.08;
+  margin: 14px 0;
+  text-wrap: balance;
+}
+.reflection-reading p,
+.reflection-foundation p {
+  font-size: 13px;
+  line-height: 1.9;
+}
+.reflection-section-heading > p {
+  max-width: 470px;
+}
+.reflection-reading-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+}
+.reflection-reading-grid article {
+  border-top: 1px solid #a8b9f040;
+  padding-top: 24px;
+}
+.reflection-reading-grid .small-caps,
+.reflection-opening .small-caps {
+  color: var(--atmosphere);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+}
+.reflection-reading h3,
+.reflection-foundation h3 {
+  color: #e9eaff;
+  font-size: 25px;
+  line-height: 1.15;
+  margin: 18px 0;
+  font-weight: 500;
+}
+.reflection-reading-grid h3 {
+  min-height: 58px;
+}
+.reflection-opening {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-top: 32px;
+  padding: 26px 30px;
+  border-left: 2px solid var(--atmosphere);
+  background: #9aaff509;
+  border-radius: 0 14px 14px 0;
+}
+.reflection-opening > svg {
+  flex-shrink: 0;
+  color: var(--atmosphere);
+  margin-top: 5px;
+}
+.reflection-opening p {
+  font-family: var(--serif);
+  font-size: 28px;
+  line-height: 1.25;
+  color: #eeeefe;
+  margin: 12px 0;
+}
+.reflection-opening small {
+  display: block;
+  max-width: 580px;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #b8c4e3;
+}
+.reflection-foundation {
+  max-width: 750px;
+  padding-top: 35px;
+  border-top: 1px solid #a8b9f033;
+}
+.reflection-foundation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 24px;
+}
+.reflection-foundation-grid h3 {
+  font-size: 25px;
+}
+.reflection-foundation-note {
+  color: #b8c4e3;
+  border-top: 1px solid #a8b9f022;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+.reflection-references {
+  margin-top: 24px;
+  background: #9aaff508;
+  border: 1px solid #a8b9f02b;
+  border-radius: 10px;
+  padding: 0 20px;
+}
+.reflection-references summary {
+  cursor: pointer;
+  padding: 18px 0;
+  color: #dbe2ff;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.reflection-references summary:focus-visible {
+  outline: 2px solid #c2ceff;
+  outline-offset: 4px;
+}
+.reflection-references ul {
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 1.85;
+}
+.reflection-references li + li {
+  margin-top: 14px;
+}
+.reflection-references p {
+  font-size: 11px;
+}
+@media (max-width: 800px) {
+  .reflection-reading,
+  .reflection-foundation {
+    margin: 44px auto;
+  }
+  .reflection-reading-grid,
+  .reflection-foundation-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .reflection-reading-grid article {
+    padding-top: 22px;
+  }
+  .reflection-reading-grid h3 {
+    min-height: 0;
+    margin: 12px 0;
+    font-size: 28px;
+  }
+  .reflection-reading p,
+  .reflection-foundation p {
+    font-size: 13px;
+    line-height: 1.85;
+  }
+  .reflection-opening {
+    padding: 22px 18px;
+    gap: 12px;
+  }
+  .reflection-opening p {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+}
+
+/* Let the final question breathe; the actions follow the reading. */
+.mobile-app.is-experience .stage-actions.final-actions {
+  position: static;
+  background: transparent;
+  box-shadow: none;
+}

@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import QRCode from "qrcode";
 import collection from "./data/poems.json";
+import { reflections } from "./reflections";
 import { BrandMark, HeroArt, VoiceArt } from "./Artwork";
 import { AppNavigation, AppTopBar } from "./AppNavigation";
 import { TouchFeedback } from "./TouchFeedback";
@@ -35,37 +36,18 @@ import {
   ImmersionControls,
   MemoryField,
   MessageLines,
+  PassageScreen,
   useAtmosphereMotion,
 } from "./Immersion";
 import "./redesign.css";
 import "./refinements.css";
+import "./encounter.css";
 
 type Voice = (typeof collection.voices)[number];
 const voices = collection.voices;
 const base = import.meta.env.BASE_URL;
 const originalFile = `${base}materiales/poemas-originales.docx`;
 const roman = ["I", "II", "III"];
-const reflections: Record<
-  string,
-  { title: string; text: string; invitation: string }
-> = {
-  paciente: {
-    title: "Cuidar también es dejar elegir.",
-    text: "Al revelar la voz de Elena, su autonomía deja de quedar detrás del diagnóstico. El miedo de su hija y la orientación del médico siguen siendo importantes; ahora pueden dialogar con lo que ella quiere para su propia vida.",
-    invitation: "¿Cómo acompañarías a Elena sin decidir por ella?",
-  },
-  cuidadora: {
-    title: "Quien cuida también necesita cuidado.",
-    text: "Al revelar la voz de su hija, el cansancio y el miedo dejan de confundirse con falta de amor. Escuchar esa carga permite pensar un cuidado compartido, que acompañe a Elena y también a quien está a su lado.",
-    invitation: "¿Qué apoyo necesitaría su hija para cuidar sin quedarse sola?",
-  },
-  medico: {
-    title: "Escuchar también forma parte de tratar.",
-    text: "Al revelar la voz del médico, aparece la tensión entre orientar y reconocer lo que no puede prometer. La información clínica sigue siendo necesaria; escuchar a Elena y a su hija permite darle un sentido humano.",
-    invitation:
-      "¿Qué pregunta abriría una conversación más allá del diagnóstico?",
-  },
-};
 
 function useRoute() {
   const [route, setRoute] = useState(window.location.hash.slice(1) || "/");
@@ -579,6 +561,8 @@ function Poems({ onRead }: { onRead: (voice: Voice) => void }) {
 
 function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
   const [step, setStep] = useState(0);
+  const [pending, setPending] = useState<number | null>(null);
+  const passage = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [active, setActive] = useState(voices[0]);
   const [visited, setVisited] = useState<string[]>([voices[0].id]);
   const [chosen, setChosen] = useState<Voice | null>(null);
@@ -600,10 +584,40 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
         ? chosen.id
         : "neutral";
   const names = ["La escena", "Las voces", "Tu elección", "La reflexión"];
-  const go = (next: number) => {
-    changeScreen(() => setStep(next), next < step ? "back" : "forward");
+  useEffect(
+    () => () => {
+      if (passage.current !== null) clearTimeout(passage.current);
+    },
+    [],
+  );
+  const finishPassage = (next: number) => {
+    if (passage.current !== null) clearTimeout(passage.current);
+    passage.current = null;
+    changeScreen(
+      () => {
+        setPending(null);
+        setStep(next);
+      },
+      next < step ? "back" : "forward",
+    );
     window.scrollTo({ top: 0, behavior: "instant" });
   };
+  const go = (next: number) => {
+    if (passage.current !== null) return;
+    if (
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+      next > step
+    ) {
+      setPending(next);
+      passage.current = setTimeout(
+        () => finishPassage(next),
+        next === 3 ? 800 : 480,
+      );
+    } else finishPassage(next);
+  };
+  useEffect(() => {
+    if (!motion && pending !== null) finishPassage(pending);
+  }, [motion, pending]);
   useEffect(() => {
     heading.current?.focus({ preventScroll: true });
   }, [step]);
@@ -649,6 +663,7 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
       }}
     >
       <MemoryField tone={tone} />
+      {pending !== null && <PassageScreen reveal={pending === 3} />}
       <div className="experience-top">
         <a className="text-link" href="#/">
           <ArrowLeft size={16} /> Volver al inicio
@@ -673,7 +688,12 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
           </li>
         ))}
       </ol>
-      <div className="experience-stage" key={step}>
+      <div
+        className="experience-stage"
+        key={step}
+        inert={pending !== null}
+        aria-busy={pending !== null}
+      >
         {step === 0 && (
           <>
             <div className="experience-heading">
@@ -973,6 +993,108 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
                 una más puede cambiar lo que entendemos por cuidar.
               </p>
             </div>
+            <section
+              className="reflection-reading"
+              aria-labelledby="reading-title"
+            >
+              <div className="reflection-section-heading">
+                <Label>DE LA ELECCIÓN A LA ESCUCHA</Label>
+                <h2 id="reading-title">Lo que cambia al escuchar.</h2>
+                <p>
+                  Una lectura posible de esta escena. Puedes volver al poema,
+                  disentir y encontrar otros matices.
+                </p>
+              </div>
+              <div className="reflection-reading-grid">
+                <article>
+                  <span className="small-caps">01 / RECONOCER</span>
+                  <h3>Lo que esta voz hace visible</h3>
+                  <p>{reflections[chosen.id].reading}</p>
+                </article>
+                <article>
+                  <span className="small-caps">02 / SOSTENER LA TENSIÓN</span>
+                  <h3>Las otras voces siguen aquí</h3>
+                  <p>{reflections[chosen.id].tension}</p>
+                </article>
+                <article>
+                  <span className="small-caps">03 / LLEVARLO AL ENCUENTRO</span>
+                  <h3>Un gesto posible de cuidado</h3>
+                  <p>{reflections[chosen.id].practice}</p>
+                </article>
+              </div>
+              <div className="reflection-opening">
+                <MessageCircle size={22} strokeWidth={1.2} aria-hidden="true" />
+                <div>
+                  <span className="small-caps">UNA FORMA DE EMPEZAR</span>
+                  <p>{reflections[chosen.id].opening}</p>
+                  <small>
+                    Haz una pausa. ¿Qué cambiaría en el encuentro si esta
+                    pregunta tuviera espacio para ser respondida?
+                  </small>
+                </div>
+              </div>
+            </section>
+            <section
+              className="reflection-foundation"
+              aria-labelledby="foundation-title"
+            >
+              <Label>POR QUÉ LEER LAS TRES VOCES</Label>
+              <h2 id="foundation-title">Escuchar también es interpretar.</h2>
+              <div className="reflection-foundation-grid">
+                <article>
+                  <h3>Una perspectiva no contiene toda la historia</h3>
+                  <p>
+                    La focalización, estudiada por Luz Aurora Pimentel, permite
+                    pensar cómo la perspectiva organiza lo que un relato deja
+                    ver. Aquí, cada voz dirige nuestra atención hacia una
+                    experiencia distinta. Cambiar de lugar amplía la lectura y
+                    ayuda a reconocer lo que nuestra primera mirada dejó fuera.
+                  </p>
+                </article>
+                <article>
+                  <h3>El sentido se abre en la lectura</h3>
+                  <p>
+                    En la reflexión de Paul Ricoeur sobre el discurso y el
+                    excedente de sentido, interpretar abre posibilidades de
+                    comprensión que no se reducen a una intención inicial. Por
+                    eso una elección puede cambiar al releer. Esa apertura pide
+                    volver a las palabras del texto y sostener la lectura con
+                    ellas, sin convertir cualquier impresión en una verdad sobre
+                    los demás.
+                  </p>
+                </article>
+              </div>
+              <p className="reflection-foundation-note">
+                Desde estas ideas, la lectura del proyecto invita a sostener
+                juntas las tres perspectivas: reconocer la libertad de Elena, la
+                necesidad de apoyo de su hija y la responsabilidad de quien
+                acompaña desde la medicina.
+              </p>
+              <details className="reflection-references">
+                <summary>Lecturas que fundamentan esta reflexión</summary>
+                <ul>
+                  <li>
+                    Luz Aurora Pimentel.{" "}
+                    <cite>
+                      El relato en perspectiva. Estudio de teoría narrativa.
+                    </cite>{" "}
+                    Perspectiva y focalización narrativa.
+                  </li>
+                  <li>
+                    Paul Ricoeur.{" "}
+                    <cite>
+                      Teoría de la interpretación. Discurso y excedente de
+                      sentido.
+                    </cite>{" "}
+                    Interpretación y posibilidades de sentido.
+                  </li>
+                </ul>
+                <p>
+                  Textos de acompañamiento del proyecto. Los poemas originales
+                  se conservan íntegros y pueden releerse en la colección.
+                </p>
+              </details>
+            </section>
             <div className="reflection-dialogue">
               <Label>SI QUIERES SEGUIR PENSANDO</Label>
               {questions.map((q, i) => (

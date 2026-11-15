@@ -13,7 +13,9 @@ Una aplicación web de Medicina Narrativa pensada primero para teléfonos, para 
 - Lector con tamaño de texto ampliable, lectura continua, fanzine para imprimir y PDF descargable.
 - Generación de QR en el navegador: permite ingresar la dirección publicada y descargar una imagen PNG para el stand.
 - Navegación por teclado, diálogos accesibles, contraste revisado y respeto por la preferencia de movimiento reducido.
-- Experiencia inmersiva con luz y partículas en movimiento, hilos que conectan las voces, colores según la perspectiva, transiciones entre escenas y una revelación final animada.
+- Pantalla inicial de carga, pausas visuales breves entre escenas y revelación gradual de la pregunta, sin porcentajes de progreso ficticios. Las pausas se omiten con movimiento reducido.
+- Experiencia inmersiva con 42 partículas en capas (28 visibles en teléfono), hilos que conectan las voces y colores según la perspectiva.
+- Reflexión ampliada para cada voz: lectura, tensiones y gestos concretos de cuidado; fundamentos de perspectiva y focalización de Luz Aurora Pimentel e interpretación de Paul Ricoeur, con referencias desplegables.
 - Paleta perla y cobalto, con un espacio azul nocturno para la experiencia. En teléfonos puedes deslizar horizontalmente los mensajes para cambiar de voz; las pestañas siguen disponibles para todos.
 
 No necesita servidor de aplicación, base de datos, claves ni registro. No usa analítica, cookies ni almacenamiento de elecciones. Los recursos y las fuentes se sirven desde el propio sitio.
@@ -62,7 +64,7 @@ Para GitHub Pages se incluye un workflow. Tras subir el código a `main`, selecc
 npm test
 ```
 
-Compila la versión de producción y ejecuta 40 pruebas de Playwright en escritorio y celular. Verifica las tres elecciones y sus reflexiones, lectura completa, diálogos y foco, descarga del Word, generación y descarga del QR, impresión, navegación, recursos locales, ausencia de almacenamiento de respuestas, animaciones automáticas, ausencia de audio, gestos de cambio de voz, distribución en PC, anchos de 320–1440 px y accesibilidad automática con axe. Usa Chromium del sistema cuando está disponible; en otra máquina instala el navegador con `npx playwright install chromium`.
+Compila la versión de producción y ejecuta pruebas de Playwright en escritorio y celular. Verifica las tres elecciones y sus reflexiones, lectura completa, diálogos y foco, descarga del Word, generación y descarga del QR, impresión, navegación, recursos locales, ausencia de almacenamiento de respuestas, animaciones automáticas, ausencia de audio, gestos de cambio de voz, distribución en PC, anchos de 320–1440 px y accesibilidad automática con axe. Usa Chromium del sistema cuando está disponible; en otra máquina instala el navegador con `npx playwright install chromium`.
 
 Para comparar **el texto exacto con el Word original**, con Python 3.10 o posterior (solo biblioteca estándar):
 

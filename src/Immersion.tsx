@@ -94,7 +94,7 @@ export function MemoryField({ tone }: { tone: string }) {
         <path d="M-100 690C160 990 290 180 640 370S1040 940 1540 430" />
         <path d="M-100 720C170 1020 310 200 660 390S1060 960 1560 450" />
       </svg>
-      {Array.from({ length: 18 }, (_, i) => (
+      {Array.from({ length: 42 }, (_, i) => (
         <i
           className="memory-mote"
           key={i}
@@ -104,6 +104,8 @@ export function MemoryField({ tone }: { tone: string }) {
               "--mote-y": `${(i * 23 + 13) % 100}%`,
               "--mote-delay": `${-i * 1.7}s`,
               "--mote-duration": `${17 + (i % 5) * 4}s`,
+              "--mote-size": `${i % 7 === 0 ? 4 : i % 3 === 0 ? 3 : 2}px`,
+              "--mote-travel": `${18 + (i % 6) * 9}px`,
             } as CSSProperties
           }
         />
@@ -112,6 +114,25 @@ export function MemoryField({ tone }: { tone: string }) {
         <VoiceArt voice={tone === "neutral" ? "paciente" : tone} />
       </div>
       <div className="atmosphere-grain" />
+    </div>
+  );
+}
+
+/** A brief passage between scenes, never a pretend network progress bar. */
+export function PassageScreen({ reveal }: { reveal: boolean }) {
+  return (
+    <div className="passage-screen" role="status" aria-live="polite">
+      <div className="passage-symbol" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <Sparkles size={24} strokeWidth={1} />
+      </div>
+      <span className="small-caps">POLIFONÍA DEL CUIDADO</span>
+      <p>
+        {reveal ? "Una voz abre una pregunta." : "Un espacio para escuchar."}
+      </p>
+      <span className="passage-line" aria-hidden="true" />
     </div>
   );
 }
