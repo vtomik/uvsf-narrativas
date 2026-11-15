@@ -247,6 +247,7 @@ test("el paquete estático funciona al publicarse en una subcarpeta", async ({
     ".woff2": "font/woff2",
     ".woff": "font/woff",
     ".pdf": "application/pdf",
+    ".png": "image/png",
   };
   const root = resolve("dist");
   const server = createServer(async (req, res) => {
@@ -286,7 +287,16 @@ test("el paquete estático funciona al publicarse en una subcarpeta", async ({
     if (response.status() >= 400) failures.push(response.url());
   });
   try {
+    const logoResponse = page.waitForResponse((response) =>
+      response.url().endsWith("/muestra/logo-uv-medicina.png"),
+    );
     await page.goto(`http://127.0.0.1:${address.port}/muestra/#/poemas`);
+    expect((await logoResponse).ok()).toBe(true);
+    await expect(
+      page.getByRole("img", {
+        name: "Universidad de Valparaíso · Escuela de Medicina",
+      }),
+    ).toBeVisible();
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
       "Mientras todavía",
     );

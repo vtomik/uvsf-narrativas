@@ -1,0 +1,655 @@
+/* The first screen is a threshold: light from a human encounter, not a menu. */
+.mobile-app.is-home {
+  color: #f1eddf;
+  background: #11172e;
+  padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px));
+}
+.mobile-app.is-home .app-topbar {
+  background: #11172ee8;
+  border-color: #a5b2e220;
+}
+.mobile-app.is-home .app-topbar-brand {
+  color: #eeeefa;
+}
+.mobile-app.is-home .app-topbar-brand small {
+  color: #bdc8e7;
+}
+.mobile-app.is-home .app-topbar-share {
+  color: #d6ddf5;
+  background: #b2bfff08;
+  border-color: #abbce32b;
+}
+.mobile-app.is-home .app-tabbar {
+  background: #141b34f5;
+  border-color: #a5b2e229;
+}
+.mobile-app.is-home .app-tabbar-item {
+  color: #bbc5e4;
+}
+.mobile-app.is-home .app-tabbar-item.is-current {
+  color: #e0e5ff;
+}
+.mobile-app.is-home .app-tabbar-indicator {
+  background: #a2b1f215;
+  border-color: #a7b6f527;
+}
+.mobile-app.is-home :focus-visible {
+  outline-color: #e7d1ae;
+}
+.mobile-app .app-home.threshold-home {
+  --threshold-x: 0px;
+  --threshold-y: 0px;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 25px 25px 20px;
+  overflow: clip;
+  color: #ebeaf5;
+  background:
+    radial-gradient(ellipse at 72% 30%, #3d376136, transparent 55%),
+    radial-gradient(ellipse at 0 100%, #243f6724, transparent 65%);
+}
+.threshold-home:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath filter='url(%23n)' d='M0 0h160v160H0z' opacity='.7'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.threshold-home .threshold-prelude {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: #b9c2df;
+  font-size: 7px;
+  letter-spacing: 0.17em;
+  line-height: 1.7;
+}
+.threshold-visual {
+  position: relative;
+  height: 220px;
+  min-width: 0;
+  margin: -7px -25px -12px;
+}
+.threshold-room {
+  position: absolute;
+  inset: 0;
+  perspective: 900px;
+}
+.threshold-aura {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: -25%;
+  bottom: -30%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 51% 49%,
+    #e9ca9d12,
+    #959fe815 30%,
+    transparent 68%
+  );
+}
+.threshold-architecture {
+  position: absolute;
+  inset: -34% 0 -25%;
+  transform: translate3d(var(--threshold-x), var(--threshold-y), 0);
+  transition: transform 1.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.threshold-perspective {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.threshold-wall {
+  stroke: #9aabd1;
+  stroke-width: 0.7;
+  opacity: 0.15;
+}
+.threshold-floor {
+  stroke: url(#threshold-floor);
+  stroke-width: 0.8;
+}
+.threshold-thread {
+  stroke: url(#threshold-thread);
+  stroke-width: 0.9;
+  stroke-dasharray: 10 5 450;
+  opacity: 0.58;
+}
+.threshold-door-light {
+  position: absolute;
+  left: 30%;
+  top: 11%;
+  width: 40%;
+  height: 83%;
+  background: radial-gradient(
+    ellipse,
+    #ead6af26,
+    #e8cd9a08 40%,
+    transparent 70%
+  );
+}
+.threshold-doorway {
+  position: absolute;
+  left: 40%;
+  top: 29%;
+  width: 20%;
+  height: 43%;
+  border: 1px solid #dcc6a16b;
+  background: linear-gradient(90deg, #eee0be0a 10%, #e9d4ad48 85%, #fcf0ce9c);
+  perspective: 500px;
+  box-shadow:
+    9px 0 24px #f4dcb320,
+    inset -2px 0 18px #f3e0bc25;
+}
+.threshold-door-panel {
+  position: absolute;
+  inset: -1px;
+  transform-origin: left center;
+  transform: rotateY(-24deg);
+  background: linear-gradient(110deg, #1c233f, #242c46);
+  border: 1px solid #a7b7de52;
+  box-shadow: 8px 0 12px #050b2366;
+  transition:
+    transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 1s;
+}
+.threshold-door-panel:before,
+.threshold-door-panel:after {
+  content: "";
+  position: absolute;
+  inset: 13% 13% 48%;
+  border: 1px solid #a7b7de16;
+}
+.threshold-door-panel:after {
+  inset: 56% 13% 12%;
+}
+.threshold-door-panel > span {
+  position: absolute;
+  width: 3px;
+  height: 11px;
+  background: #d9c5a0;
+  right: 13%;
+  top: 49%;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #e3cf9e40;
+}
+.threshold-door-seam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  right: 0;
+  background: #f1e1bd;
+  box-shadow: 0 0 12px #f1d7a9;
+}
+.threshold-light-path {
+  position: absolute;
+  left: 31%;
+  top: 72%;
+  width: 42%;
+  height: 35%;
+  background: linear-gradient(#e7cba521, transparent);
+  clip-path: polygon(22% 0, 69% 0, 100% 100%, 0 100%);
+  filter: blur(2px);
+}
+.threshold-voice {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  color: #cbd4ef;
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.25;
+}
+.threshold-voice small {
+  font-family: "DM Sans", sans-serif;
+  font-size: 5.5px;
+  line-height: 1.8;
+  letter-spacing: 0.12em;
+  color: #b2bfe3;
+  margin-bottom: 4px;
+}
+.threshold-voice > i {
+  width: 3px;
+  height: 3px;
+  background: #c9d5f8;
+  border-radius: 50%;
+  position: absolute;
+  left: -10px;
+  top: 8px;
+  box-shadow: 0 0 9px #cbdcff60;
+}
+.voice-patient {
+  left: 9%;
+  top: 30%;
+}
+.voice-daughter {
+  right: 5%;
+  top: 58%;
+  color: #e9cfca;
+}
+.voice-daughter small {
+  color: #d6b9d0;
+}
+.voice-daughter > i {
+  background: #e8c3cd;
+}
+.voice-doctor {
+  left: 14%;
+  bottom: 7%;
+  color: #b5d8e3;
+}
+.voice-doctor small {
+  color: #a6c8dc;
+}
+.voice-doctor > i {
+  background: #b0d2e0;
+}
+.threshold-dust {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  left: var(--dust-x);
+  top: var(--dust-y);
+  border-radius: 50%;
+  background: #e3d5bc;
+  opacity: 0.22;
+  pointer-events: none;
+}
+.threshold-copy {
+  position: relative;
+  min-width: 0;
+  text-align: center;
+}
+.threshold-overline {
+  margin: 13px 0 15px;
+  color: #cfbfac;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.3;
+}
+.mobile-app .app-home.threshold-home h1 {
+  margin: 0;
+  color: #f0edf7;
+  font-size: clamp(43px, 11.2vw, 62px);
+  line-height: 0.99;
+  letter-spacing: -1.5px;
+  text-wrap: balance;
+}
+.mobile-app .app-home.threshold-home h1 em {
+  color: #c1c6ef;
+}
+.mobile-app .threshold-home .app-home-description {
+  margin: 19px auto 24px;
+  max-width: 340px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #c4cce4;
+}
+.threshold-enter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 55px;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 16px 19px;
+  color: #18233d;
+  background: #e8ddc6;
+  border: 1px solid #f0e5cf;
+  border-radius: 4px 17px 4px 17px;
+  box-shadow: 0 6px 40px #e4cb9d0f;
+  font-size: 12px;
+  transition:
+    background 0.3s,
+    box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.threshold-enter:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    #fff8 50%,
+    transparent 80%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.8s;
+  pointer-events: none;
+}
+.threshold-enter:hover {
+  color: #18233d;
+  background: #f1e7d3;
+  box-shadow: 0 6px 45px #e4cb9d20;
+}
+.threshold-enter:hover:before {
+  transform: translateX(120%);
+}
+.threshold-enter svg {
+  transition: transform 0.4s;
+  flex-shrink: 0;
+}
+.threshold-enter:hover svg {
+  transform: translateX(3px);
+}
+.threshold-invitation {
+  max-width: 320px;
+  margin: 14px auto 12px;
+  color: #b9c3dd;
+  font-size: 10px;
+  line-height: 1.8;
+}
+.threshold-other-paths {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.threshold-other-paths a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 5px 0;
+  color: #d5dcf2;
+  font-size: 10px;
+}
+.threshold-other-paths a:hover {
+  color: #f0debe;
+}
+.threshold-other-paths > span {
+  width: 1px;
+  height: 12px;
+  background: #a8b8dc33;
+}
+.threshold-bottom-note {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  grid-column: 1 / -1;
+  color: #aebbd6;
+  font-size: 8px;
+  line-height: 1.7;
+  text-align: center;
+  margin: 15px 0 0;
+}
+.threshold-bottom-note > span {
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+  background: #b9c7eb;
+}
+@media (min-width: 701px) {
+  .mobile-app .app-home.threshold-home {
+    padding: 30px 35px;
+  }
+  .threshold-visual {
+    height: 290px;
+    max-width: 520px;
+    width: 100%;
+    margin: -12px auto -20px;
+  }
+  .threshold-home .threshold-prelude {
+    font-size: 8px;
+  }
+  .mobile-app .app-home.threshold-home h1 {
+    font-size: 65px;
+  }
+}
+@media (min-width: 1000px) {
+  .mobile-app.is-home {
+    padding-bottom: 0;
+  }
+  .mobile-app .app-home.threshold-home {
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
+    min-height: calc(100svh - 102px);
+    padding: 34px 32px 26px;
+  }
+  .threshold-home .threshold-prelude {
+    grid-column: 1 / -1;
+    margin-bottom: 24px;
+  }
+  .threshold-copy {
+    grid-column: 1;
+    grid-row: 2;
+    text-align: left;
+    z-index: 2;
+    padding: 10px 0 10px 4px;
+  }
+  .threshold-visual {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: stretch;
+    height: auto;
+    min-height: 540px;
+    width: calc(100% + 75px);
+    max-width: none;
+    margin: 0 -35px 0 -40px;
+  }
+  .threshold-architecture {
+    inset: -8% -10% -8%;
+  }
+  .threshold-overline {
+    font-size: 22px;
+    margin: 0 0 23px;
+  }
+  .mobile-app .app-home.threshold-home h1 {
+    font-size: clamp(62px, 5.9vw, 83px);
+    line-height: 0.98;
+    letter-spacing: -2px;
+  }
+  .mobile-app .threshold-home .app-home-description {
+    font-size: 13px;
+    max-width: 350px;
+    margin: 25px 0 30px;
+  }
+  .threshold-enter {
+    margin-left: 0;
+    max-width: 320px;
+    min-height: 58px;
+    font-size: 13px;
+  }
+  .threshold-invitation {
+    margin: 19px 0 12px;
+    font-size: 11px;
+    max-width: 325px;
+  }
+  .threshold-other-paths {
+    justify-content: flex-start;
+  }
+  .threshold-other-paths a {
+    font-size: 11px;
+  }
+  .threshold-bottom-note {
+    margin: 14px 0 0;
+    justify-content: flex-start;
+    padding-left: 4px;
+    font-size: 9px;
+  }
+  .threshold-voice {
+    font-size: 22px;
+  }
+  .threshold-voice small {
+    font-size: 6.5px;
+  }
+  .voice-patient {
+    left: 2%;
+    top: 28%;
+  }
+  .voice-daughter {
+    right: 2%;
+    top: 55%;
+  }
+  .voice-doctor {
+    left: 10%;
+    bottom: 19%;
+  }
+}
+@media (max-width: 360px) {
+  .mobile-app .app-home.threshold-home {
+    padding: 22px 20px 17px;
+  }
+  .threshold-visual {
+    height: 180px;
+    margin: -4px -20px -13px;
+  }
+  .threshold-overline {
+    font-size: 17px;
+    margin: 12px 0;
+  }
+  .mobile-app .app-home.threshold-home h1 {
+    font-size: 42px;
+  }
+  .mobile-app .threshold-home .app-home-description {
+    font-size: 11px;
+    margin: 17px auto 20px;
+  }
+  .threshold-home .threshold-prelude {
+    font-size: 6px;
+  }
+  .threshold-voice {
+    font-size: 14px;
+  }
+  .threshold-voice small {
+    font-size: 5px;
+  }
+  .threshold-bottom-note {
+    font-size: 7px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .threshold-aura {
+    animation: threshold-breathe 11s ease-in-out infinite alternate;
+  }
+  .threshold-dust {
+    animation: threshold-drift var(--dust-duration) var(--dust-delay)
+      ease-in-out infinite alternate;
+  }
+  .threshold-thread {
+    animation: threshold-flow 23s linear infinite;
+  }
+  .threshold-thread.thread-daughter {
+    animation-direction: reverse;
+    animation-duration: 29s;
+  }
+  .threshold-thread.thread-doctor {
+    animation-duration: 35s;
+  }
+  .threshold-door-panel {
+    animation: threshold-open 1.7s 180ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .threshold-copy {
+    animation: threshold-copy-arrive 1.1s 180ms ease-out both;
+  }
+  .threshold-home[data-entering="true"] .threshold-visual {
+    animation: threshold-cross 650ms cubic-bezier(0.45, 0, 0.2, 1) both;
+    z-index: 4;
+    pointer-events: none;
+  }
+  .threshold-home[data-entering="true"] .threshold-door-panel {
+    animation: threshold-door-open 650ms ease-in both;
+  }
+  .threshold-home[data-entering="true"] .threshold-copy {
+    animation: threshold-leave 550ms ease-in both;
+  }
+  .threshold-home[data-entering="true"] .threshold-voice {
+    opacity: 0;
+    transition: opacity 200ms;
+  }
+  @keyframes threshold-breathe {
+    from {
+      opacity: 0.65;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+  @keyframes threshold-flow {
+    to {
+      stroke-dashoffset: -465;
+    }
+  }
+  @keyframes threshold-drift {
+    from {
+      transform: translateY(6px);
+      opacity: 0.08;
+    }
+    to {
+      transform: translateY(-16px);
+      opacity: 0.48;
+    }
+  }
+  @keyframes threshold-open {
+    from {
+      transform: rotateY(-7deg);
+    }
+    to {
+      transform: rotateY(-24deg);
+    }
+  }
+  @keyframes threshold-copy-arrive {
+    from {
+      opacity: 0.15;
+      transform: translateY(13px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes threshold-cross {
+    to {
+      transform: scale(2.5);
+      filter: blur(1px);
+      opacity: 0.25;
+    }
+  }
+  @keyframes threshold-door-open {
+    to {
+      transform: rotateY(-80deg);
+      opacity: 0.1;
+    }
+  }
+  @keyframes threshold-leave {
+    to {
+      opacity: 0;
+      transform: translateY(-9px);
+    }
+  }
+}
+.threshold-home[data-visibility="hidden"] *,
+.threshold-home[data-visibility="hidden"] *:before,
+.threshold-home[data-visibility="hidden"] *:after {
+  animation-play-state: paused !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .threshold-home *,
+  .threshold-home *:before,
+  .threshold-home *:after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .threshold-architecture {
+    transform: none;
+  }
+}

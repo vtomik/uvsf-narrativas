@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { BookOpen, House, Leaf, Share2, Sparkles } from "lucide-react";
-import { BrandMark } from "./Artwork";
+import { UniversityLogo } from "./UniversityLogo";
 import "./app-navigation.css";
 
 const destinations = [
@@ -48,9 +48,9 @@ export function AppTopBar({ onShare }: { onShare: () => void }) {
         <a
           href="#/"
           className="app-topbar-brand"
-          aria-label="Polifonía del cuidado, inicio"
+          aria-label="Universidad de Valparaíso · Polifonía del cuidado, inicio"
         >
-          <BrandMark />
+          <UniversityLogo />
           <span>
             Polifonía<small>DEL CUIDADO</small>
           </span>

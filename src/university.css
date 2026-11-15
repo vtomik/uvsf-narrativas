@@ -1,0 +1,62 @@
+.university-logo {
+  display: block;
+  background: #fff;
+  border-radius: 6px;
+  padding: 8px;
+}
+.app-topbar .app-topbar-inner {
+  gap: 12px;
+}
+.app-topbar-brand > .university-logo {
+  flex-shrink: 0;
+  width: 108px;
+  height: auto;
+}
+.app-topbar .app-topbar-brand > span {
+  font-size: 22px;
+}
+.app-topbar .app-topbar-brand small {
+  font-size: 6px;
+  letter-spacing: 1.6px;
+}
+.academic-context {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  align-items: start;
+  gap: 32px;
+}
+.academic-context > .university-logo {
+  width: 170px;
+  height: auto;
+  border: 1px solid #e0e5f0;
+}
+.academic-context h2 {
+  margin: 15px 0;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.1;
+}
+.academic-context p {
+  font-size: 14px;
+  line-height: 1.85;
+}
+.academic-context .course-teacher {
+  margin-top: 18px;
+  color: #35466f;
+}
+@media (min-width: 1000px) {
+  .app-topbar-brand > .university-logo {
+    width: 116px;
+  }
+  .app-topbar .app-topbar-brand > span {
+    font-size: 28px;
+  }
+}
+@media (max-width: 700px) {
+  .academic-context {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .academic-context > .university-logo {
+    width: 145px;
+  }
+}

@@ -1,36 +1,3 @@
-export function BrandMark({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="40"
-      height="44"
-      viewBox="0 0 40 44"
-      fill="none"
-      aria-hidden="true"
-    >
-      <ellipse
-        cx="14"
-        cy="20"
-        rx="8"
-        ry="16"
-        transform="rotate(-32 14 20)"
-        stroke="currentColor"
-        strokeWidth="1.2"
-      />
-      <ellipse
-        cx="26"
-        cy="20"
-        rx="8"
-        ry="16"
-        transform="rotate(32 26 20)"
-        stroke="currentColor"
-        strokeWidth="1.2"
-      />
-      <path d="M20 39V4" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
-  );
-}
-
 export function ThreadStar({ className = "" }: { className?: string }) {
   return (
     <svg

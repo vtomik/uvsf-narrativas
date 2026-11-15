@@ -5,7 +5,8 @@ Una aplicación web de Medicina Narrativa pensada primero para teléfonos, para 
 ## Qué incluye
 
 - Inicio, colección de poemas y presentación del proyecto.
-- Inicio compacto, barra inferior permanente, lector a pantalla completa y paneles que se abren desde abajo. Las áreas de toque y el espacio inferior se adaptan a teléfonos con barra de gestos.
+- Identidad UV con el logo de la Universidad de Valparaíso · Escuela de Medicina y contexto académico del ramo **Narrativas de la Enfermedad**, profesor **Cristopher Jegó**.
+- Portada inmersiva como umbral hacia una consulta: profundidad, luz y tres voces antes de entrar. Barra inferior permanente, lector a pantalla completa y paneles que se abren desde abajo. Las áreas de toque y el espacio inferior se adaptan a teléfonos con barra de gestos.
 - Respuesta visual suave al tocar controles y transiciones cortas entre pantallas, con alternativa sin movimiento.
 - Recorrido participativo: escena ficticia → tres mensajes no enviados → elección de una voz → reflexión específica y preguntas para conversar.
 - Los **tres poemas íntegros** de Joel Jara, extraídos del Word original: 60 versos, títulos, puntuación y estrofas conservados.
@@ -87,7 +88,7 @@ El script utiliza Playwright y el navegador Chromium para imprimir la web en A4.
 
 ## Archivos importantes
 
-La navegación y el feedback táctil están en `src/AppNavigation.tsx` y `src/TouchFeedback.tsx`. El diseño de teléfono está en `src/phone-app.css`; sus pruebas están en `tests/phone.spec.ts`. La app no incluye un botón ni un diálogo de instalación.
+La portada y su transición de entrada están en `src/Home.tsx` y `src/home-experience.css`. La navegación y el feedback táctil están en `src/AppNavigation.tsx` y `src/TouchFeedback.tsx`. El diseño de teléfono está en `src/phone-app.css`; sus pruebas están en `tests/phone.spec.ts`. La app no incluye un botón ni un diálogo de instalación.
 
 La atmósfera y sus controles están en `src/Immersion.tsx` y `src/immersion.css`. La nueva identidad visual está en `src/redesign.css` y las transiciones en `src/refinements.css`. Sus pruebas específicas están en `tests/immersion.spec.ts` y `tests/responsive-redesign.spec.ts`.
 
@@ -104,3 +105,5 @@ La atmósfera y sus controles están en `src/Immersion.tsx` y `src/immersion.css
 La situación clínica de la web sigue el documento de poemas: una paciente de 68 años y un diagnóstico de Alzheimer. El PDF del seminario presenta una escena más general de espera de resultados; se tomó el documento poético como fuente de la escena concreta. La fundamentación en Pimentel y Ricoeur y los roles del equipo provienen de la propuesta del seminario.
 
 Los textos originales y documentos corresponden al material proporcionado por el equipo. Las tipografías son DM Sans y Cormorant Garamond, distribuidas bajo SIL Open Font License; sus licencias se incluyen en `public/licencias/`. Los iconos son Lucide, bajo ISC.
+
+El logo UV de `public/logo-uv-medicina.png` se extrajo del material del seminario proporcionado por el equipo, conservando su diseño. Se sirve localmente en la cabecera y en el contexto académico del proyecto.

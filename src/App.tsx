@@ -13,7 +13,6 @@ import {
   Expand,
   MessageCircle,
   MoveHorizontal,
-  Leaf,
   Plus,
   QrCode,
   RotateCcw,
@@ -24,7 +23,9 @@ import QRCode from "qrcode";
 import collection from "./data/poems.json";
 import { reflections } from "./reflections";
 import { AuthorFoundations } from "./AuthorFoundations";
-import { BrandMark, HeroArt, VoiceArt } from "./Artwork";
+import { UniversityLogo } from "./UniversityLogo";
+import { VoiceArt } from "./Artwork";
+import Home from "./Home";
 import { AppNavigation, AppTopBar } from "./AppNavigation";
 import { TouchFeedback } from "./TouchFeedback";
 import { changeScreen } from "./transitions";
@@ -401,71 +402,6 @@ function VoiceCard({ voice, onRead }: { voice: Voice; onRead: () => void }) {
   );
 }
 
-function Home() {
-  return (
-    <div className="app-home">
-      <div className="app-greeting">
-        <span className="app-kicker">TU PAUSA DE HOY</span>
-        <span className="app-time">
-          <Clock3 size={13} /> A tu ritmo
-        </span>
-      </div>
-      <h1>
-        Lo que no cabe
-        <br />
-        en la <em>ficha clínica.</em>
-      </h1>
-      <p className="app-home-description">
-        Una historia. Tres voces.
-        <br />
-        Un momento para mirar desde otro lugar.
-      </p>
-      <div className="app-story-card">
-        <HeroArt />
-        <div className="app-story-actions">
-          <div className="app-story-meta">
-            <span className="voice-dots">
-              <i />
-              <i />
-              <i />
-            </span>
-            <span>3 perspectivas · A tu ritmo</span>
-            <span className="story-badge">EXPERIENCIA</span>
-          </div>
-          <a href="#/experiencia" className="button primary app-start">
-            Entrar en la experiencia <ArrowRight size={20} />
-          </a>
-        </div>
-      </div>
-      <div className="app-shortcuts">
-        <a href="#/poemas">
-          <span className="shortcut-icon">
-            <BookOpen size={21} strokeWidth={1.4} />
-          </span>
-          <span>
-            <strong>Los poemas</strong>
-            <small>Lee a tu ritmo</small>
-          </span>
-          <ChevronRight size={17} />
-        </a>
-        <a href="#/proyecto">
-          <span className="shortcut-icon">
-            <Leaf size={21} strokeWidth={1.4} />
-          </span>
-          <span>
-            <strong>El proyecto</strong>
-            <small>Conoce su sentido</small>
-          </span>
-          <ChevronRight size={17} />
-        </a>
-      </div>
-      <p className="app-home-privacy">
-        <ShieldCheck size={12} /> Sin registro. Solo tú y las historias.
-      </p>
-    </div>
-  );
-}
-
 function Poems({ onRead }: { onRead: (voice: Voice) => void }) {
   const [continuous, setContinuous] = useState(false);
   return (
@@ -688,7 +624,7 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
                 </div>
               </div>
               <aside className="scene-aside">
-                <BrandMark />
+                <MessageCircle size={36} strokeWidth={1} aria-hidden="true" />
                 <h2>
                   Una invitación
                   <br />a <em>cambiar de lugar.</em>
@@ -1090,6 +1026,25 @@ function Project() {
           </p>
         </div>
       </div>
+      <section
+        className="project-section academic-context"
+        aria-labelledby="course-title"
+      >
+        <UniversityLogo />
+        <div>
+          <Label>EL RAMO QUE DA ORIGEN AL PROYECTO</Label>
+          <h2 id="course-title">Narrativas de la Enfermedad</h2>
+          <p>
+            Una propuesta desarrollada en el marco de la asignatura Narrativas
+            de la Enfermedad de la Universidad de Valparaíso, Campus San Felipe.
+            La lectura de las tres voces invita a relacionar la experiencia de
+            enfermar y cuidar con la escucha, la memoria y la interpretación.
+          </p>
+          <p className="course-teacher">
+            Profesor: <strong>Cristopher Jegó</strong>
+          </p>
+        </div>
+      </section>
       <section className="project-section">
         <Label>LA PREGUNTA QUE NOS REÚNE</Label>
         <h2 className="project-question">
@@ -1214,7 +1169,11 @@ export default function App() {
       .querySelector('meta[name="theme-color"]')
       ?.setAttribute(
         "content",
-        route === "/experiencia" ? "#141b36" : "#f7f8fc",
+        route === "/experiencia"
+          ? "#141b36"
+          : route === "/"
+            ? "#11172e"
+            : "#f7f8fc",
       );
   }, [page, route]);
   return (
@@ -1230,7 +1189,7 @@ export default function App() {
         Saltar al contenido
       </a>
       <div
-        className={`app-shell mobile-app ${route === "/experiencia" ? "is-experience" : ""}`}
+        className={`app-shell mobile-app ${route === "/experiencia" ? "is-experience" : route === "/" ? "is-home" : ""}`}
       >
         <AppTopBar onShare={() => setSharing(true)} />
         <main id="main" tabIndex={-1}>
