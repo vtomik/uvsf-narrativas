@@ -87,34 +87,43 @@ test("los controles de teléfono siguen accesibles sobre la barra inferior", asy
   }
 });
 
-test("se puede consultar cómo añadir la app al teléfono sin un aviso nativo", async ({
+test("las cuatro pantallas conservan la navegación sin instalar ni descargar documentos", async ({
   page,
 }) => {
-  await page.addInitScript(() => {
-    window.addEventListener(
-      "beforeinstallprompt",
-      (event) => {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-      },
-      true,
-    );
-  });
   await page.goto("/");
-  const install = page.getByRole("button", {
-    name: "Añadir a pantalla de inicio",
-    exact: true,
+  const navigation = page.getByRole("navigation", {
+    name: "Navegación de la app",
   });
-  await install.click();
-  const dialog = page.getByRole("dialog", {
-    name: "Añadir a pantalla de inicio",
-    exact: true,
-  });
-  await expect(dialog).toBeVisible();
-  await expect(dialog).toContainText("HTTPS");
-  await dialog.getByRole("button", { name: "Entendido", exact: true }).click();
-  await expect(dialog).toHaveCount(0);
-  await expect(install).toBeFocused();
+  for (const label of ["Inicio", "Poemas", "Proyecto", "Experiencia"]) {
+    const destination = navigation.getByRole("link", {
+      name: label,
+      exact: true,
+    });
+    await destination.click();
+    await expect(destination).toHaveAttribute("aria-current", "page");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(
+      page.getByRole("button", {
+        name: /(?:añadir|agregar) a (?:la )?pantalla de inicio|instalar aplicación/i,
+      }),
+    ).toHaveCount(0);
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect(
+      page.getByRole("button", { name: /imprimir fanzine/i }),
+    ).toHaveCount(0);
+    const documentLinks = await page
+      .getByRole("link")
+      .evaluateAll((links) =>
+        links
+          .map((link) => link.getAttribute("href") || "")
+          .filter((href) =>
+            /\/materiales\/(?:seminario\.pdf|fanzine\.pdf|poemas-originales\.docx)(?:[?#]|$)/.test(
+              href,
+            ),
+          ),
+      );
+    expect(documentLinks).toEqual([]);
+  }
 });
 
 test("el manifiesto usa rutas relativas para instalar desde una subcarpeta", async ({

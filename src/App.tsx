@@ -13,10 +13,8 @@ import {
   Expand,
   MessageCircle,
   MoveHorizontal,
-  Smartphone,
   Leaf,
   Plus,
-  Printer,
   QrCode,
   RotateCcw,
   ShieldCheck,
@@ -25,10 +23,10 @@ import {
 import QRCode from "qrcode";
 import collection from "./data/poems.json";
 import { reflections } from "./reflections";
+import { AuthorFoundations } from "./AuthorFoundations";
 import { BrandMark, HeroArt, VoiceArt } from "./Artwork";
 import { AppNavigation, AppTopBar } from "./AppNavigation";
 import { TouchFeedback } from "./TouchFeedback";
-import { useInstallPrompt } from "./install";
 import { changeScreen } from "./transitions";
 import "./phone-app.css";
 import {
@@ -45,8 +43,6 @@ import "./encounter.css";
 
 type Voice = (typeof collection.voices)[number];
 const voices = collection.voices;
-const base = import.meta.env.BASE_URL;
-const originalFile = `${base}materiales/poemas-originales.docx`;
 const roman = ["I", "II", "III"];
 
 function useRoute() {
@@ -405,19 +401,13 @@ function VoiceCard({ voice, onRead }: { voice: Voice; onRead: () => void }) {
   );
 }
 
-function Home({
-  onInstall,
-  installed,
-}: {
-  onInstall: () => void;
-  installed: boolean;
-}) {
+function Home() {
   return (
     <div className="app-home">
       <div className="app-greeting">
         <span className="app-kicker">TU PAUSA DE HOY</span>
         <span className="app-time">
-          <Clock3 size={13} /> 4 min
+          <Clock3 size={13} /> A tu ritmo
         </span>
       </div>
       <h1>
@@ -469,12 +459,6 @@ function Home({
           <ChevronRight size={17} />
         </a>
       </div>
-      {!installed && (
-        <button className="app-install" onClick={onInstall}>
-          <Smartphone size={16} /> Añadir a pantalla de inicio{" "}
-          <Plus size={15} />
-        </button>
-      )}
       <p className="app-home-privacy">
         <ShieldCheck size={12} /> Sin registro. Solo tú y las historias.
       </p>
@@ -512,22 +496,6 @@ function Poems({ onRead }: { onRead: (voice: Voice) => void }) {
             <Expand size={16} />
             {continuous ? "Ver tarjetas" : "Lectura continua"}
           </button>
-          <button className="text-link" onClick={() => window.print()}>
-            <Printer size={16} />
-            Imprimir fanzine
-          </button>
-          <a
-            className="text-link"
-            href={`${base}materiales/fanzine.pdf`}
-            download
-          >
-            <Download size={16} />
-            Fanzine PDF
-          </a>
-          <a className="text-link" href={originalFile} download>
-            <Download size={16} />
-            Descargar Word
-          </a>
         </div>
       </div>
       {continuous ? (
@@ -669,7 +637,7 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
           <ArrowLeft size={16} /> Volver al inicio
         </a>
         <span>
-          <Clock3 size={15} /> UNA PAUSA DE 4 MINUTOS
+          <Clock3 size={15} /> UNA PAUSA PARA ESCUCHAR
         </span>
       </div>
       <ImmersionControls frame={frame} />
@@ -1040,60 +1008,7 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
             >
               <Label>POR QUÉ LEER LAS TRES VOCES</Label>
               <h2 id="foundation-title">Escuchar también es interpretar.</h2>
-              <div className="reflection-foundation-grid">
-                <article>
-                  <h3>Una perspectiva no contiene toda la historia</h3>
-                  <p>
-                    La focalización, estudiada por Luz Aurora Pimentel, permite
-                    pensar cómo la perspectiva organiza lo que un relato deja
-                    ver. Aquí, cada voz dirige nuestra atención hacia una
-                    experiencia distinta. Cambiar de lugar amplía la lectura y
-                    ayuda a reconocer lo que nuestra primera mirada dejó fuera.
-                  </p>
-                </article>
-                <article>
-                  <h3>El sentido se abre en la lectura</h3>
-                  <p>
-                    En la reflexión de Paul Ricoeur sobre el discurso y el
-                    excedente de sentido, interpretar abre posibilidades de
-                    comprensión que no se reducen a una intención inicial. Por
-                    eso una elección puede cambiar al releer. Esa apertura pide
-                    volver a las palabras del texto y sostener la lectura con
-                    ellas, sin convertir cualquier impresión en una verdad sobre
-                    los demás.
-                  </p>
-                </article>
-              </div>
-              <p className="reflection-foundation-note">
-                Desde estas ideas, la lectura del proyecto invita a sostener
-                juntas las tres perspectivas: reconocer la libertad de Elena, la
-                necesidad de apoyo de su hija y la responsabilidad de quien
-                acompaña desde la medicina.
-              </p>
-              <details className="reflection-references">
-                <summary>Lecturas que fundamentan esta reflexión</summary>
-                <ul>
-                  <li>
-                    Luz Aurora Pimentel.{" "}
-                    <cite>
-                      El relato en perspectiva. Estudio de teoría narrativa.
-                    </cite>{" "}
-                    Perspectiva y focalización narrativa.
-                  </li>
-                  <li>
-                    Paul Ricoeur.{" "}
-                    <cite>
-                      Teoría de la interpretación. Discurso y excedente de
-                      sentido.
-                    </cite>{" "}
-                    Interpretación y posibilidades de sentido.
-                  </li>
-                </ul>
-                <p>
-                  Textos de acompañamiento del proyecto. Los poemas originales
-                  se conservan íntegros y pueden releerse en la colección.
-                </p>
-              </details>
+              <AuthorFoundations variant="reflection" />
             </section>
             <div className="reflection-dialogue">
               <Label>SI QUIERES SEGUIR PENSANDO</Label>
@@ -1189,30 +1104,7 @@ function Project() {
       </section>
       <section className="project-section">
         <Label>DOS IDEAS PARA ABRIR LA LECTURA</Label>
-        <div className="theory-grid">
-          <article>
-            <span className="small-caps">01 / PERSPECTIVA Y FOCALIZACIÓN</span>
-            <h3>Luz Aurora Pimentel</h3>
-            <cite>El relato en perspectiva</cite>
-            <p>
-              Lo que conocemos de una historia depende de quién la cuenta. Por
-              eso las tres voces parten de la misma consulta, pero atienden a
-              emociones y necesidades diferentes.
-            </p>
-          </article>
-          <article>
-            <span className="small-caps">02 / EXCEDENTE DE SENTIDO</span>
-            <h3>Paul Ricoeur</h3>
-            <cite>
-              Teoría de la interpretación. Discurso y excedente de sentido
-            </cite>
-            <p>
-              Un texto abre significados que van más allá de la intención
-              inicial de quien lo escribe. Tu elección y tu lectura participan
-              en esa interpretación; no buscamos una única respuesta.
-            </p>
-          </article>
-        </div>
+        <AuthorFoundations variant="project" />
       </section>
       <section className="project-section ethics-section">
         <ShieldCheck size={36} strokeWidth={1} />
@@ -1260,14 +1152,6 @@ function Project() {
               20 de noviembre de 2026
             </p>
           </div>
-          <a
-            className="text-link"
-            href={`${base}materiales/seminario.pdf`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Ver documento del seminario <ArrowUpRight size={17} />
-          </a>
         </div>
       </section>
       <div className="small-invitation">
@@ -1310,12 +1194,6 @@ export default function App() {
   const route = useRoute();
   const [reader, setReader] = useState<Voice | null>(null);
   const [sharing, setSharing] = useState(false);
-  const [installing, setInstalling] = useState(false);
-  const { installed, isIOS, promptInstall } = useInstallPrompt();
-  const install = async () => {
-    const result = await promptInstall();
-    if (result === "unavailable") setInstalling(true);
-  };
   useEffect(() => {
     setReader(null);
     setSharing(false);
@@ -1357,7 +1235,7 @@ export default function App() {
         <AppTopBar onShare={() => setSharing(true)} />
         <main id="main" tabIndex={-1}>
           {route === "/" ? (
-            <Home onInstall={install} installed={installed} />
+            <Home />
           ) : route === "/experiencia" ? (
             <Experience onRead={setReader} />
           ) : route === "/poemas" ? (
@@ -1387,62 +1265,6 @@ export default function App() {
         />
       )}{" "}
       {sharing && <ShareModal onClose={() => setSharing(false)} />}
-      {installing && (
-        <Modal
-          title="Añadir a pantalla de inicio"
-          onClose={() => setInstalling(false)}
-          className="install-sheet"
-        >
-          <div className="sheet-handle" aria-hidden="true" />
-          <Smartphone size={34} strokeWidth={1.2} />
-          <Label>SIEMPRE A MANO</Label>
-          <h2>
-            Un lugar en
-            <br />
-            <em>tu teléfono.</em>
-          </h2>
-          <p>Abre la experiencia como una app desde tu pantalla de inicio.</p>
-          <ol>
-            {isIOS ? (
-              <>
-                <li>
-                  Abre esta web en <strong>Safari</strong>.
-                </li>
-                <li>
-                  Toca <strong>Compartir</strong> en la barra del navegador.
-                </li>
-                <li>
-                  Elige <strong>Añadir a pantalla de inicio</strong>.
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  Abre esta web en <strong>Chrome</strong> o un navegador
-                  compatible.
-                </li>
-                <li>
-                  Toca el menú del navegador <strong>⋮</strong>.
-                </li>
-                <li>
-                  Elige <strong>Instalar aplicación</strong> o{" "}
-                  <strong>Añadir a pantalla de inicio</strong>.
-                </li>
-              </>
-            )}
-          </ol>
-          <p className="install-hint">
-            La instalación depende de tu navegador y de que la web esté
-            publicada con HTTPS. La app necesita conexión para abrirse.
-          </p>
-          <button
-            className="button primary"
-            onClick={() => setInstalling(false)}
-          >
-            Entendido <Check size={17} />
-          </button>
-        </Modal>
-      )}
       <TouchFeedback />
       <PrintFanzine />
     </>

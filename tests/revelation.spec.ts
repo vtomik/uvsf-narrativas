@@ -82,6 +82,52 @@ test("el campo de partículas tiene profundidad y mantiene una densidad acotada 
   await expect(motes.first()).toHaveCSS("animation-name", "none");
 });
 
+test("las obras citadas explican la lectura y sus referencias se pueden abrir con teclado", async ({
+  page,
+}) => {
+  for (const route of ["/proyecto", "/experiencia"]) {
+    await page.goto(`/#${route}`);
+    if (route === "/experiencia") {
+      await chooseVoice(page, 0);
+      await page.getByRole("button", { name: "Revelar y reflexionar" }).click();
+    }
+    const foundations = page.locator(".author-foundations");
+    const pimentel = foundations.getByRole("article").filter({
+      has: page.getByRole("heading", {
+        name: "Luz Aurora Pimentel",
+        exact: true,
+      }),
+    });
+    const ricoeur = foundations.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "Paul Ricoeur", exact: true }),
+    });
+    await expect(pimentel.locator("cite")).toContainText(
+      "El relato en perspectiva",
+    );
+    await expect(pimentel).toContainText("¿quién cuenta?");
+    await expect(pimentel).toContainText("focalización");
+    await expect(ricoeur.locator("cite")).toContainText(
+      "Discurso y excedente de sentido",
+    );
+    await expect(ricoeur).toContainText("metáfora y el símbolo");
+    await expect(ricoeur).toContainText("sostener su interpretación");
+    const references = foundations.locator("details");
+    await expect(references.getByRole("list")).not.toBeVisible();
+    const summary = references.locator("summary");
+    await expect(summary).toHaveText("Obras citadas y claves de lectura");
+    await summary.focus();
+    await page.keyboard.press("Enter");
+    await expect(references.getByRole("list")).toBeVisible();
+    await expect(references.getByRole("listitem")).toHaveCount(2);
+    await expect(references.getByRole("listitem").first()).toContainText(
+      "Pimentel",
+    );
+    await expect(references.getByRole("listitem").last()).toContainText(
+      "Ricoeur",
+    );
+  }
+});
+
 test("la carga inicial muestra un estado útil hasta que la app puede responder", async ({
   page,
 }) => {

@@ -149,11 +149,10 @@ test("lector: versos íntegros, tamaño de texto, navegación y foco", async ({
       ).join("\n\n"),
     ).toBe(voice.body);
   }
-  const downloadPromise = page.waitForEvent("download");
-  await page.getByRole("link", { name: "Descargar Word" }).click();
-  const download = await downloadPromise;
-  expect(download.suggestedFilename()).toBe("poemas-originales.docx");
-  expect(await download.failure()).toBeNull();
+  await expect(page.locator("main a[download]")).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Imprimir fanzine", exact: true }),
+  ).toHaveCount(0);
 });
 
 test("QR con enlace público, validación y descarga", async ({ page }) => {

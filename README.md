@@ -7,15 +7,14 @@ Una aplicación web de Medicina Narrativa pensada primero para teléfonos, para 
 - Inicio, colección de poemas y presentación del proyecto.
 - Inicio compacto, barra inferior permanente, lector a pantalla completa y paneles que se abren desde abajo. Las áreas de toque y el espacio inferior se adaptan a teléfonos con barra de gestos.
 - Respuesta visual suave al tocar controles y transiciones cortas entre pantallas, con alternativa sin movimiento.
-- Opción de añadir a la pantalla de inicio del teléfono cuando el navegador lo permite, con iconos y modo standalone. Requiere HTTPS y conexión; no ofrece uso sin internet.
 - Recorrido participativo: escena ficticia → tres mensajes no enviados → elección de una voz → reflexión específica y preguntas para conversar.
-- Los **tres poemas íntegros** de Joel Jara, extraídos del Word original: 60 versos, títulos, puntuación y estrofas conservados. Incluye el Word original para descargar.
-- Lector con tamaño de texto ampliable, lectura continua, fanzine para imprimir y PDF descargable.
+- Los **tres poemas íntegros** de Joel Jara, extraídos del Word original: 60 versos, títulos, puntuación y estrofas conservados.
+- Lector con tamaño de texto ampliable y lectura continua dentro de la app.
 - Generación de QR en el navegador: permite ingresar la dirección publicada y descargar una imagen PNG para el stand.
 - Navegación por teclado, diálogos accesibles, contraste revisado y respeto por la preferencia de movimiento reducido.
 - Pantalla inicial de carga, pausas visuales breves entre escenas y revelación gradual de la pregunta, sin porcentajes de progreso ficticios. Las pausas se omiten con movimiento reducido.
 - Experiencia inmersiva con 42 partículas en capas (28 visibles en teléfono), hilos que conectan las voces y colores según la perspectiva.
-- Reflexión ampliada para cada voz: lectura, tensiones y gestos concretos de cuidado; fundamentos de perspectiva y focalización de Luz Aurora Pimentel e interpretación de Paul Ricoeur, con referencias desplegables.
+- Reflexión ampliada para cada voz: lectura, tensiones y gestos concretos de cuidado; desarrollo de la perspectiva y la focalización en *El relato en perspectiva* de Luz Aurora Pimentel, y del discurso, la escritura y el excedente de sentido en *Teoría de la interpretación* de Paul Ricoeur, con referencias desplegables.
 - Paleta perla y cobalto, con un espacio azul nocturno para la experiencia. En teléfonos puedes deslizar horizontalmente los mensajes para cambiar de voz; las pestañas siguen disponibles para todos.
 
 No necesita servidor de aplicación, base de datos, claves ni registro. No usa analítica, cookies ni almacenamiento de elecciones. Los recursos y las fuentes se sirven desde el propio sitio.
@@ -64,7 +63,7 @@ Para GitHub Pages se incluye un workflow. Tras subir el código a `main`, selecc
 npm test
 ```
 
-Compila la versión de producción y ejecuta pruebas de Playwright en escritorio y celular. Verifica las tres elecciones y sus reflexiones, lectura completa, diálogos y foco, descarga del Word, generación y descarga del QR, impresión, navegación, recursos locales, ausencia de almacenamiento de respuestas, animaciones automáticas, ausencia de audio, gestos de cambio de voz, distribución en PC, anchos de 320–1440 px y accesibilidad automática con axe. Usa Chromium del sistema cuando está disponible; en otra máquina instala el navegador con `npx playwright install chromium`.
+Compila la versión de producción y ejecuta pruebas de Playwright en escritorio y celular. Verifica las tres elecciones y sus reflexiones, lectura completa, diálogos y foco, ausencia de botones de descarga documental e instalación, generación y descarga del QR, impresión, navegación, recursos locales, ausencia de almacenamiento de respuestas, animaciones automáticas, ausencia de audio, gestos de cambio de voz, distribución en PC, anchos de 320–1440 px y accesibilidad automática con axe. Usa Chromium del sistema cuando está disponible; en otra máquina instala el navegador con `npx playwright install chromium`.
 
 Para comparar **el texto exacto con el Word original**, con Python 3.10 o posterior (solo biblioteca estándar):
 
@@ -84,11 +83,11 @@ npm run export:fanzine
 npm run build
 ```
 
-El script utiliza Playwright y el navegador Chromium para imprimir la web en A4. La última compilación incorpora el PDF actualizado en `dist/`. También se puede usar **Imprimir fanzine** en la página Los poemas y elegir “Guardar como PDF”.
+El script utiliza Playwright y el navegador Chromium para imprimir la web en A4. La última compilación incorpora el PDF actualizado en `dist/`. La interfaz de la app se centra en la lectura y no incluye controles de descarga documental ni de impresión del fanzine.
 
 ## Archivos importantes
 
-La navegación y el feedback táctil están en `src/AppNavigation.tsx` y `src/TouchFeedback.tsx`. El diseño de teléfono está en `src/phone-app.css`; `src/install.ts` gestiona la instalación opcional. Sus pruebas están en `tests/phone.spec.ts`.
+La navegación y el feedback táctil están en `src/AppNavigation.tsx` y `src/TouchFeedback.tsx`. El diseño de teléfono está en `src/phone-app.css`; sus pruebas están en `tests/phone.spec.ts`. La app no incluye un botón ni un diálogo de instalación.
 
 La atmósfera y sus controles están en `src/Immersion.tsx` y `src/immersion.css`. La nueva identidad visual está en `src/redesign.css` y las transiciones en `src/refinements.css`. Sus pruebas específicas están en `tests/immersion.spec.ts` y `tests/responsive-redesign.spec.ts`.
 

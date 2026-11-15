@@ -1,0 +1,59 @@
+.author-foundations .author-work {
+  display: block;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 26px;
+}
+.mobile-app .author-foundations .author-work {
+  font-size: 13px;
+}
+.mobile-app .author-foundations article p {
+  font-size: 14px;
+  line-height: 1.85;
+}
+.author-foundations h4 {
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 500;
+  margin: 25px 0 12px;
+}
+.authors-reflection h4 {
+  color: #e2e7ff;
+}
+.authors-reflection .author-work,
+.authors-reflection article > .small-caps {
+  color: #c1ccea;
+}
+.author-connection {
+  border-top: 1px solid #8a9aca44;
+  padding-top: 22px;
+  margin-top: 32px;
+}
+.author-references {
+  margin-top: 25px;
+  padding: 0 20px;
+  border: 1px solid #8a9aca44;
+  border-radius: 10px;
+}
+.author-references summary {
+  cursor: pointer;
+  padding: 18px 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.author-references summary:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+.author-references ul {
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 1.85;
+}
+.author-references li + li {
+  margin-top: 14px;
+}
+.author-references p {
+  font-size: 12px;
+  line-height: 1.85;
+}

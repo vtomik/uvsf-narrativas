@@ -169,9 +169,6 @@ body {
 .app-shortcuts > a > svg {
   color: #6c78a2;
 }
-.app-install {
-  color: #53649a;
-}
 .app-home-privacy {
   color: #68728a;
 }
@@ -700,8 +697,7 @@ body {
   color: #626ed2;
 }
 .modal > p:not(.eyebrow),
-.modal .field-help,
-.modal .install-hint {
+.modal .field-help {
   color: #626b83;
 }
 .modal .field-error {
@@ -709,12 +705,6 @@ body {
 }
 .modal .sheet-handle {
   background: #c8cfe5;
-}
-.install-sheet > svg {
-  color: #6a7bce;
-}
-.install-sheet li {
-  color: #3d4969;
 }
 
 @media (min-width: 701px) and (max-width: 999px) {
@@ -891,13 +881,6 @@ body {
   }
   .app-shortcuts small {
     font-size: 9px;
-  }
-  .app-install {
-    grid-column: 1;
-    grid-row: 5;
-    margin-top: 17px;
-    justify-content: flex-start;
-    font-size: 11px;
   }
   .app-home-privacy {
     grid-column: 1;
@@ -1260,8 +1243,7 @@ body {
   .reader .poem-body {
     font-size: 25px;
   }
-  .share-modal,
-  .install-sheet {
+  .share-modal {
     inset: 0;
     margin: auto;
     width: min(540px, calc(100% - 48px));
