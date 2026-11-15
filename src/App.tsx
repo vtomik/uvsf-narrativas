@@ -12,6 +12,7 @@ import {
   Download,
   Expand,
   MessageCircle,
+  MoveHorizontal,
   Smartphone,
   Leaf,
   Plus,
@@ -36,6 +37,8 @@ import {
   MessageLines,
   useAtmosphereMotion,
 } from "./Immersion";
+import "./redesign.css";
+import "./refinements.css";
 
 type Voice = (typeof collection.voices)[number];
 const voices = collection.voices;
@@ -104,31 +107,66 @@ function Modal({
   className?: string;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const alive = useRef(false);
+  const exit = useRef<Animation | null>(null);
+  const closing = useRef(false);
   useEffect(() => {
+    alive.current = true;
     const el = dialog.current!;
     const previous = document.activeElement as HTMLElement | null;
     const previousOverflow = document.body.style.overflow;
     el.showModal();
     document.body.style.overflow = "hidden";
     return () => {
+      alive.current = false;
+      exit.current?.cancel();
       el.close();
       document.body.style.overflow = previousOverflow;
       previous?.focus();
     };
   }, []);
+  const close = async () => {
+    if (closing.current) return;
+    const el = dialog.current;
+    if (
+      !el ||
+      !el.animate ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      onClose();
+      return;
+    }
+    closing.current = true;
+    exit.current = el.animate(
+      [
+        { opacity: 1, transform: "translateY(0) scale(1)" },
+        { opacity: 0, transform: "translateY(16px) scale(.99)" },
+      ],
+      { duration: 160, easing: "cubic-bezier(.4,0,.8,.2)", fill: "forwards" },
+    );
+    try {
+      await exit.current.finished;
+    } catch {
+      /* Navigation can unmount an open sheet. */
+    }
+    if (alive.current) onClose();
+  };
   return (
     <dialog
       className={`modal ${className}`}
       ref={dialog}
       aria-label={title}
-      onCancel={onClose}
+      onCancel={(e) => {
+        e.preventDefault();
+        void close();
+      }}
       onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+        if (e.target === e.currentTarget) void close();
       }}
     >
       <button
         className="icon-button close-modal"
-        onClick={onClose}
+        onClick={close}
         aria-label="Cerrar ventana"
       >
         <X size={21} />
@@ -170,7 +208,17 @@ function PoemReader({
       onClose={onClose}
       className={`reader ${large ? "large-type" : ""}`}
     >
-      <div className="reader-scroll" ref={content}>
+      <div
+        className="reader-scroll"
+        ref={content}
+        onScroll={(event) => {
+          const el = event.currentTarget;
+          const progress =
+            el.scrollTop / Math.max(1, el.scrollHeight - el.clientHeight);
+          el.style.setProperty("--reading-progress", String(progress));
+        }}
+      >
+        <div className="reader-progress" aria-hidden="true" />
         <div className={`reader-banner tone-${voice.id}`}>
           <VoiceArt voice={voice.id} />
           <div>
@@ -557,7 +605,8 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
   const [question, setQuestion] = useState<number | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const frame = useRef<HTMLDivElement>(null);
-  const [motion, setMotion] = useAtmosphereMotion();
+  const touch = useRef<{ x: number; y: number } | null>(null);
+  const motion = useAtmosphereMotion();
   const [visible, setVisible] = useState(!document.hidden);
   useEffect(() => {
     const update = () => setVisible(!document.hidden);
@@ -628,12 +677,7 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
           <Clock3 size={15} /> UNA PAUSA DE 4 MINUTOS
         </span>
       </div>
-      <ImmersionControls
-        tone={tone}
-        motion={motion}
-        onMotion={() => setMotion((current) => !current)}
-        frame={frame}
-      />
+      <ImmersionControls frame={frame} />
       <ol className="stepper" aria-label="Etapas de la experiencia">
         {names.map((name, i) => (
           <li
@@ -781,12 +825,41 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
                   Ninguna contiene toda la verdad.
                 </p>
               </div>
+              <p className="voice-swipe-hint">
+                <MoveHorizontal size={14} /> Desliza para cambiar de voz
+              </p>
               <div
                 key={active.id}
                 className={`message-panel tone-${active.id}`}
                 id="voice-panel"
                 role="tabpanel"
                 aria-labelledby={`tab-${active.id}`}
+                onPointerDown={(event) => {
+                  if (
+                    event.pointerType !== "touch" ||
+                    (event.target as Element).closest("button, a")
+                  )
+                    return;
+                  touch.current = { x: event.clientX, y: event.clientY };
+                }}
+                onPointerCancel={() => {
+                  touch.current = null;
+                }}
+                onPointerUp={(event) => {
+                  const start = touch.current;
+                  touch.current = null;
+                  if (!start || event.pointerType !== "touch") return;
+                  const dx = event.clientX - start.x,
+                    dy = event.clientY - start.y;
+                  if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+                    listen(
+                      voices[
+                        (voices.indexOf(active) + (dx < 0 ? 1 : 2)) %
+                          voices.length
+                      ],
+                    );
+                  }
+                }}
               >
                 <div className="message-meta">
                   <span>
@@ -1158,7 +1231,13 @@ export default function App() {
             : "Página no encontrada";
   useEffect(() => {
     document.title = `${page} · Polifonía del cuidado`;
-  }, [page]);
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute(
+        "content",
+        route === "/experiencia" ? "#141b36" : "#f7f8fc",
+      );
+  }, [page, route]);
   return (
     <>
       <a

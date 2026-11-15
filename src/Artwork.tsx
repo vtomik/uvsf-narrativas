@@ -165,8 +165,8 @@ export function HeroArt() {
             y2="530"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#DED9BE" />
-            <stop offset="1" stopColor="#CFCCAF" />
+            <stop stopColor="#E5E6F5" />
+            <stop offset="1" stopColor="#D8DCEB" />
           </linearGradient>
           <linearGradient
             id="olive"
@@ -176,8 +176,8 @@ export function HeroArt() {
             y2="440"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#889376" />
-            <stop offset="1" stopColor="#ABB297" />
+            <stop stopColor="#A5ABDD" />
+            <stop offset="1" stopColor="#C2C8ED" />
           </linearGradient>
           <linearGradient
             id="clay"
@@ -187,8 +187,8 @@ export function HeroArt() {
             y2="470"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#BB7A5B" />
-            <stop offset="1" stopColor="#D3A07B" />
+            <stop stopColor="#D4A1B3" />
+            <stop offset="1" stopColor="#E9BFCD" />
           </linearGradient>
           <linearGradient
             id="forest"
@@ -198,17 +198,17 @@ export function HeroArt() {
             y2="480"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#3A5948" />
-            <stop offset="1" stopColor="#64816A" />
+            <stop stopColor="#789BC6" />
+            <stop offset="1" stopColor="#A0BBDE" />
           </linearGradient>
         </defs>
         <path fill="url(#paper)" d="M0 0H600V530H0z" />
-        <circle cx="301" cy="192" r="161" stroke="#F4EED9" strokeWidth="1" />
+        <circle cx="301" cy="192" r="161" stroke="#F5F5FC" strokeWidth="1" />
         <circle
           cx="301"
           cy="192"
           r="182"
-          stroke="#F4EED9"
+          stroke="#F5F5FC"
           strokeWidth=".7"
           opacity=".7"
         />
@@ -216,11 +216,11 @@ export function HeroArt() {
           cx="301"
           cy="192"
           r="202"
-          stroke="#F4EED9"
+          stroke="#F5F5FC"
           strokeWidth=".7"
           opacity=".4"
         />
-        <circle cx="300" cy="62" r="23" fill="#BCA060" />
+        <circle cx="300" cy="62" r="23" fill="#A7A0D7" />
         <path
           d="M32 530V292C32 209 76 172 127 172C181 172 223 213 223 292V530"
           fill="url(#olive)"
@@ -234,7 +234,7 @@ export function HeroArt() {
           fill="url(#forest)"
         />
         <g
-          stroke="#F7EFDC"
+          stroke="#FFF9FA"
           strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -252,17 +252,17 @@ export function HeroArt() {
         </g>
         <path
           d="M-35 456C35 370 132 484 200 435C262 390 244 338 297 359C355 382 328 475 400 455C477 434 507 360 637 408"
-          stroke="#F7E7BF"
+          stroke="#EFEDFF"
           strokeWidth="1.4"
         />
-        <g fill="#F7E7BF">
+        <g fill="#EFEDFF">
           <circle cx="120" cy="439" r="4" />
           <circle cx="294" cy="358" r="4" />
           <circle cx="474" cy="425" r="4" />
         </g>
-        <path d="M25 511H575" stroke="#F2E9CF" strokeWidth=".7" opacity=".5" />
+        <path d="M25 511H575" stroke="#F3F2FF" strokeWidth=".7" opacity=".5" />
         <g
-          fill="#F4EED9"
+          fill="#F5F5FC"
           fontFamily="sans-serif"
           fontSize="10"
           letterSpacing="3"

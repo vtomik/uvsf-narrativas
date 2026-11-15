@@ -1,0 +1,1331 @@
+/* Pearl, cobalt and three human perspectives. Imported after the app's base styles. */
+:root {
+  --ink: #202942;
+  --paper: #f7f8fc;
+  --muted: #626b83;
+  --line: #e1e5f0;
+  --green: #4864e8;
+  --clay: #a55979;
+}
+html,
+body {
+  background: #eef0f8;
+}
+::selection {
+  background: #dfe4ff;
+  color: #243671;
+}
+.mobile-app {
+  max-width: 760px;
+  color: #202942;
+  background:
+    radial-gradient(ellipse at 95% 5%, #e9e8fa99, transparent 50%), #f7f8fc;
+  box-shadow: 0 0 80px #303e7810;
+  --muted: #626b83;
+}
+.mobile-app .eyebrow,
+.app-kicker {
+  color: #626b83;
+}
+.mobile-app .eyebrow > span {
+  background: #6d75ce;
+}
+.mobile-app .button.primary,
+.button.primary {
+  background: #4864e8;
+  color: #fff;
+  border-color: #4864e8;
+  box-shadow: 0 7px 20px #4864e827;
+}
+.mobile-app .button.primary:hover:not(:disabled),
+.button.primary:hover:not(:disabled) {
+  background: #3651d0;
+  color: #fff;
+}
+.mobile-app .text-link:hover:not(:disabled) {
+  color: #3651d0;
+}
+.mobile-app :focus-visible,
+.app-topbar-share:focus-visible,
+.app-topbar-brand:focus-visible,
+.app-tabbar-item:focus-visible {
+  outline-color: #4864e8;
+}
+.mobile-app .page-heading h1,
+.mobile-app .app-home h1 {
+  color: #202942;
+}
+.mobile-app .page-heading h1 em,
+.mobile-app .app-home h1 em {
+  color: #5168d1;
+}
+.app-topbar {
+  color: #202942;
+  background: #f7f8fcf0;
+  border-bottom-color: #dce1ef99;
+}
+.app-topbar-brand {
+  color: #202942;
+}
+.app-topbar-brand > svg {
+  color: #4864e8;
+}
+.app-topbar-brand small {
+  color: #616d89;
+}
+.app-topbar-share {
+  color: #4864e8;
+  background: #fff;
+  border-color: #e0e5f3;
+  box-shadow: 0 2px 10px #3a4c6b04;
+}
+.app-topbar-share:hover {
+  background: #e9edff;
+}
+.mobile-app .app-tabbar {
+  color: #596780;
+  background: #fffffffa;
+  border-color: #dce1ef;
+  box-shadow: 0 -8px 32px #33416c0a;
+}
+.app-tabbar-item {
+  color: #5c6680;
+}
+.app-tabbar-item.is-current {
+  color: #3f59cf;
+}
+.app-tabbar-indicator {
+  background: #e9edff;
+  border-color: #dce3ff;
+}
+.app-time {
+  color: #5160a0;
+  border-color: #dfe5f4;
+  background: #fff;
+}
+.app-home h1 {
+  letter-spacing: -1.7px;
+}
+.app-home-description {
+  color: #626b83;
+  font-size: 13px;
+}
+.app-story-card {
+  background: #fff;
+  border-color: #e2e6f2;
+  box-shadow: 0 16px 40px #354a8610;
+}
+.app-story-card .hero-art {
+  background: #ecebfa;
+}
+.app-story-card .art-caption {
+  background: #f0effa;
+  color: #303957;
+}
+.app-story-card .art-caption p em {
+  color: #5f6a95;
+}
+.app-story-card .art-star {
+  color: #7b83d5;
+}
+.app-story-actions {
+  background: #fff;
+}
+.app-story-meta {
+  color: #626c85;
+}
+.voice-dots > i {
+  background: #a5a6e2;
+  border-color: #fff;
+}
+.voice-dots > i + i {
+  background: #e5a5b8;
+}
+.voice-dots > i:last-child {
+  background: #8fb5e4;
+}
+.story-badge {
+  color: #5c68a4;
+  border-color: #dfe4f2;
+  background: #f8f9fd;
+}
+.app-shortcuts > a {
+  background: #fff;
+  border-color: #e1e5f0;
+  box-shadow: 0 4px 15px #33426b04;
+}
+.app-shortcuts > a:hover {
+  background: #f1f3ff;
+}
+.shortcut-icon {
+  color: #586fd9;
+}
+.app-shortcuts strong {
+  color: #29334e;
+}
+.app-shortcuts small {
+  color: #626b83;
+}
+.app-shortcuts > a > svg {
+  color: #6c78a2;
+}
+.app-install {
+  color: #53649a;
+}
+.app-home-privacy {
+  color: #68728a;
+}
+
+/* Keep the original illustration, with the new palette. */
+.portraits #paper stop:first-child {
+  stop-color: #eeeafc;
+}
+.portraits #paper stop:last-child {
+  stop-color: #e4e7fa;
+}
+.portraits #olive stop:first-child {
+  stop-color: #9b9ed3;
+}
+.portraits #olive stop:last-child {
+  stop-color: #bec3ed;
+}
+.portraits #clay stop:first-child {
+  stop-color: #dba4b6;
+}
+.portraits #clay stop:last-child {
+  stop-color: #ebc4d2;
+}
+.portraits #forest stop:first-child {
+  stop-color: #6589be;
+}
+.portraits #forest stop:last-child {
+  stop-color: #a4bce4;
+}
+.portraits > circle[fill] {
+  fill: #9a93d1;
+}
+.portraits > circle[stroke] {
+  stroke: #fff;
+}
+.portraits > g[stroke] {
+  stroke: #fdfaff;
+}
+.portraits > path[stroke] {
+  stroke: #f8f8ff;
+}
+.portraits > g[fill] {
+  fill: #f8f8ff;
+}
+
+/* A light, legible library with separate cover colors for each voice. */
+.tone-paciente {
+  --tone: #e9e8fa;
+  --tone-ink: #5e5893;
+  --tone-line: #d1cfed;
+  --tone-dark: #7771be;
+}
+.tone-cuidadora {
+  --tone: #f5e5e8;
+  --tone-ink: #8a526a;
+  --tone-line: #e7c9d4;
+  --tone-dark: #af6d88;
+}
+.tone-medico {
+  --tone: #e3ecf9;
+  --tone-ink: #41628d;
+  --tone-line: #c7d7ee;
+  --tone-dark: #688fc3;
+}
+.mobile-app .page-heading > p,
+.mobile-app .subtle {
+  color: #626b83;
+}
+.mobile-app .collection-toolbar {
+  border-color: #e0e5f0;
+}
+.mobile-app .collection-toolbar > span {
+  color: #66718d;
+}
+.mobile-app .collection-toolbar .text-link {
+  color: #4a5d99;
+  background: #fff;
+  border-color: #e0e5f0;
+}
+.mobile-app .collection-toolbar .text-link:hover {
+  color: #3651d0;
+  background: #eef1ff;
+}
+.mobile-app .poems-page .voice-card {
+  color: #202942;
+  border: 1px solid #fff8;
+  box-shadow: 0 4px 16px #34426e05;
+}
+.mobile-app .poems-page .voice-card h3 {
+  color: #29334e;
+}
+.mobile-app .collection-note {
+  border-color: #e0e5f0;
+}
+.mobile-app .collection-note > svg {
+  color: #6c7bc2;
+}
+.mobile-app .collection-note h3 {
+  color: #29334e;
+}
+.mobile-app .collection-note p {
+  color: #626b83;
+}
+.mobile-app .small-invitation {
+  border-color: #e0e5f0;
+}
+.mobile-app .small-invitation > p {
+  color: #29334e;
+}
+.mobile-app .continuous-poem,
+.mobile-app .continuous-poems {
+  border-color: #e0e5f0;
+}
+.mobile-app .continuous-poem > h2,
+.mobile-app .continuous-poem .poem-body {
+  color: #29334e;
+}
+
+/* The experience changes to a quiet midnight screen, without music. */
+.mobile-app.is-experience {
+  --night: #141b36;
+  --starlight: #f4f4ff;
+  --quiet: #bdc6e3;
+  --night-line: #7c8abb33;
+  --muted: #bdc6e3;
+  background: #141b36;
+  color: #f4f4ff;
+}
+.mobile-app.is-experience .app-topbar {
+  color: #f4f4ff;
+  background: #141b36ed;
+  border-color: #7484b42b;
+}
+.mobile-app.is-experience .app-topbar-brand {
+  color: #f3f3ff;
+}
+.mobile-app.is-experience .app-topbar-brand > svg {
+  color: #bec7ff;
+}
+.mobile-app.is-experience .app-topbar-brand small {
+  color: #bcc6e6;
+}
+.mobile-app.is-experience .app-topbar-share {
+  color: #d7deff;
+  background: #a4b3ff0a;
+  border-color: #94a5e32b;
+  box-shadow: none;
+}
+.mobile-app.is-experience .app-tabbar {
+  color: #c2c9e5;
+  background: #161f3a;
+  border-color: #8495c438;
+}
+.mobile-app.is-experience .app-tabbar-item {
+  color: #b8c2e0;
+}
+.mobile-app.is-experience .app-tabbar-item.is-current {
+  color: #e1e5ff;
+}
+.mobile-app.is-experience .app-tabbar-indicator {
+  background: #a5b2ff1a;
+  border-color: #a5b2ff19;
+}
+.mobile-app.is-experience :focus-visible {
+  outline-color: #c8d0ff;
+}
+.mobile-app.is-experience .experience-page {
+  --atmosphere: #c7c8ff;
+  --glow-rgb: 145, 147, 230;
+}
+.mobile-app.is-experience .experience-page[data-tone="paciente"] {
+  --atmosphere: #c7c8ff;
+  --glow-rgb: 145, 147, 230;
+}
+.mobile-app.is-experience .experience-page[data-tone="cuidadora"] {
+  --atmosphere: #f2b6ca;
+  --glow-rgb: 216, 139, 170;
+}
+.mobile-app.is-experience .experience-page[data-tone="medico"] {
+  --atmosphere: #a9d2fa;
+  --glow-rgb: 116, 164, 226;
+}
+.mobile-app.is-experience .experience-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 10%, #30396180, transparent 65%), #141b36;
+}
+.mobile-app.is-experience .memory-mote {
+  background: #c7cfff;
+  box-shadow: 0 0 9px #c7cfff55;
+}
+.mobile-app.is-experience .stepper li {
+  color: #b3bfdc;
+}
+.mobile-app.is-experience .step-line {
+  background: #7c8db544;
+}
+.mobile-app.is-experience .stepper .complete .step-line {
+  background: #798bc2;
+}
+.mobile-app.is-experience .stepper .current {
+  color: #f1f2ff;
+}
+.mobile-app.is-experience .stepper .current b {
+  background: #a4b1ff1a;
+  color: var(--atmosphere);
+}
+.mobile-app.is-experience .stepper .complete b {
+  color: #c6cef1;
+}
+.mobile-app.is-experience .immersion-tools {
+  justify-content: flex-end;
+}
+.mobile-app.is-experience .immersion-controls {
+  justify-content: flex-end;
+}
+.mobile-app.is-experience .immersion-controls button {
+  color: #c9d4f4;
+  border-color: #93a6e22b;
+  background: #a6b5ff09;
+}
+.mobile-app.is-experience .immersion-controls button:hover {
+  background: #a6b5ff15;
+}
+.mobile-app.is-experience .immersion-error {
+  color: #f2b6ca;
+}
+.mobile-app.is-experience .eyebrow {
+  color: #c1cae9;
+}
+.mobile-app.is-experience .eyebrow > span {
+  background: #b8bfff;
+  box-shadow: 0 0 12px #b8bfff30;
+}
+.mobile-app.is-experience .experience-heading h1 {
+  color: #f6f4ff;
+}
+.mobile-app.is-experience .experience-heading h1 em {
+  color: var(--atmosphere);
+}
+.mobile-app.is-experience .experience-heading > p {
+  color: #bdc6e3;
+}
+.mobile-app.is-experience .encounter-thread > span {
+  color: #b6c0e0;
+}
+.mobile-app.is-experience .encounter-thread > span.is-lit {
+  color: var(--atmosphere);
+}
+.mobile-app.is-experience .encounter-thread > svg {
+  color: #94a2d0;
+}
+.mobile-app.is-experience .scene-note {
+  background: linear-gradient(135deg, #293353d9, #1c2543ed);
+  border-color: #a4b2ee33;
+  box-shadow: 0 22px 65px #03091e24;
+}
+.mobile-app.is-experience .scene-note:before {
+  background: #a9b1f1;
+}
+.mobile-app.is-experience .scene-note > .small-caps {
+  color: #bfcbea;
+}
+.mobile-app.is-experience .scene-context > p {
+  color: #c8d0ea;
+}
+.mobile-app.is-experience .scene-context blockquote {
+  color: #e6dfff;
+  border-color: #bdbeff55;
+}
+.mobile-app.is-experience .scene-context > p:last-child {
+  color: #eeebff;
+}
+.mobile-app.is-experience .scene-aside > svg {
+  color: #b6c3f5;
+}
+.mobile-app.is-experience .scene-aside h2 {
+  color: #f2f0ff;
+}
+.mobile-app.is-experience .scene-aside h2 em {
+  color: #c6caff;
+}
+.mobile-app.is-experience .scene-aside > p,
+.mobile-app.is-experience .scene-aside > .gentle-note {
+  color: #bdc7e4;
+  border-color: #9cafe033;
+}
+.mobile-app.is-experience .stage-actions {
+  background: linear-gradient(180deg, #141b36f0, #141b36fc);
+  box-shadow: 0 -14px 25px #141b36e0;
+}
+.mobile-app.is-experience .stage-actions > span,
+.mobile-app.is-experience .stage-next > span {
+  color: #bdc7e4;
+}
+.mobile-app.is-experience .stage-actions .button.primary,
+.mobile-app.is-experience .button.primary {
+  background: #bfc9ff;
+  color: #1a2856;
+  border-color: #cdd5ff55;
+  box-shadow: 0 6px 25px #91a4ff19;
+}
+.mobile-app.is-experience .button.primary:hover:not(:disabled) {
+  background: #d1d9ff;
+  color: #1a2856;
+}
+.mobile-app.is-experience .text-link:hover:not(:disabled) {
+  color: #dce1ff;
+}
+.mobile-app.is-experience .voice-tabs > button {
+  color: #f1f2ff;
+  border-color: #9aace033;
+}
+.mobile-app.is-experience .voice-tabs > button.active {
+  background: #adbbff0e;
+  border-color: #afbeff66;
+  box-shadow: inset 0 0 25px #a4b4ff07;
+}
+.mobile-app.is-experience .voice-tabs > button small {
+  color: #bbc6e5;
+}
+.mobile-app.is-experience .voice-tabs .tab-number,
+.mobile-app.is-experience .voice-tabs > button > svg {
+  color: var(--atmosphere);
+}
+.mobile-app.is-experience .listening-tip {
+  color: #b7c3e4;
+}
+.mobile-app.is-experience .voice-swipe-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 10px;
+  line-height: 1.7;
+  color: #bdc9e8;
+  margin: 0 0 3px;
+}
+.mobile-app.is-experience .voice-swipe-hint > svg {
+  width: 15px;
+  height: 15px;
+}
+.mobile-app.is-experience .message-panel {
+  background: linear-gradient(140deg, #2b3151f5, #1b2340f5);
+  border-color: rgba(var(--glow-rgb), 0.4);
+  color: #f4f3ff;
+  box-shadow: 0 24px 70px #03091e44;
+}
+.mobile-app.is-experience .message-panel.tone-cuidadora {
+  background: linear-gradient(140deg, #3a2d49f5, #24213ff5);
+}
+.mobile-app.is-experience .message-panel.tone-medico {
+  background: linear-gradient(140deg, #233650f5, #1a2643f5);
+}
+.mobile-app.is-experience .message-panel blockquote,
+.mobile-app.is-experience .message-verse {
+  color: #f6f1ff;
+}
+.mobile-app.is-experience .message-meta,
+.mobile-app.is-experience .message-recipient {
+  color: var(--atmosphere);
+}
+.mobile-app.is-experience .message-bottom > span {
+  color: #b8c5e5;
+}
+.mobile-app.is-experience .message-bottom .text-link {
+  color: #d5ddff;
+}
+.mobile-app.is-experience .choice-card {
+  background: linear-gradient(160deg, #2a2d4ff0, #1d2341f5);
+  border-color: #9cace033;
+  color: #f3f2ff;
+}
+.mobile-app.is-experience .choice-card.tone-cuidadora {
+  background: linear-gradient(160deg, #3a2b47f0, #26203ef5);
+}
+.mobile-app.is-experience .choice-card.tone-medico {
+  background: linear-gradient(160deg, #24344df0, #1b2742f5);
+}
+.mobile-app.is-experience .choice-card.tone-paciente {
+  --card-light: #c7c8ff;
+}
+.mobile-app.is-experience .choice-card.tone-cuidadora {
+  --card-light: #f2b6ca;
+}
+.mobile-app.is-experience .choice-card.tone-medico {
+  --card-light: #a9d2fa;
+}
+.mobile-app.is-experience .choice-card > p {
+  color: #eeeefe;
+}
+.mobile-app.is-experience .choice-card .choice-label {
+  color: #d7dff9;
+  border-color: #9aacde33;
+}
+.mobile-app.is-experience .chosen .radio-display {
+  color: #212d57;
+}
+.mobile-app.is-experience .reflection-head h1 {
+  color: #f3f0ff;
+}
+.mobile-app.is-experience .reflection-head > p {
+  color: #c5cdea;
+}
+.mobile-app.is-experience .reflection-question {
+  background: #a5b4ff09;
+  border-color: rgba(var(--glow-rgb), 0.3);
+}
+.mobile-app.is-experience .reflection-question h2 {
+  color: #e3e5ff;
+}
+.mobile-app.is-experience .reflection-question p {
+  color: #bdc9e8;
+}
+.mobile-app.is-experience .reflection-accordion {
+  border-color: #9aace033;
+}
+.mobile-app.is-experience .reflection-accordion > button {
+  color: #dbe2ff;
+}
+.mobile-app.is-experience .reflection-accordion > p,
+.mobile-app.is-experience .privacy-note {
+  color: #bdc9e8;
+}
+.mobile-app.is-experience .experience-page:fullscreen {
+  background: #141b36;
+}
+
+/* Reading and project surfaces use the same crisp palette. */
+.mobile-app .project-intro,
+.mobile-app .project-section,
+.mobile-app .event-note {
+  border-color: #e0e5f0;
+}
+.mobile-app .project-big-number {
+  color: #6e7cc4;
+}
+.mobile-app .project-big-number > span {
+  color: #626b83;
+}
+.mobile-app .project-intro h2,
+.mobile-app .project-question,
+.mobile-app .theory-grid h3,
+.mobile-app .ethics-section h2,
+.mobile-app .team-grid h3 {
+  color: #29334e;
+}
+.mobile-app .project-question em {
+  color: #586ed0;
+}
+.mobile-app .project-intro p,
+.mobile-app .project-section > p,
+.mobile-app .theory-grid p,
+.mobile-app .ethics-section p,
+.mobile-app .event-note p {
+  color: #626b83;
+}
+.mobile-app .theory-grid article {
+  background: #fff;
+  border-color: #e0e5f0;
+}
+.mobile-app .theory-grid article > span,
+.mobile-app .theory-grid cite,
+.mobile-app .team-grid span {
+  color: #63709a;
+}
+.mobile-app .ethics-section {
+  background: #eeeffa;
+  border-color: #dce1f2;
+}
+.mobile-app .ethics-section > svg {
+  color: #6b7acc;
+}
+.mobile-app .event-note .text-link {
+  color: #4864c9;
+}
+.modal {
+  background: #fdfdff;
+  color: #29334e;
+}
+.modal .eyebrow {
+  color: #626b83;
+}
+.modal .eyebrow > span {
+  background: #7b83d5;
+}
+.modal .close-modal {
+  background: #ffffffed;
+  color: #445073;
+  border-color: #dce2f2;
+}
+.modal .reader-tools > .small-caps,
+.modal .reader-byline,
+.modal .reader-note,
+.modal .reader-pagination > span {
+  color: #626b83;
+}
+.modal .reader-note,
+.modal .reader-pagination {
+  border-color: #e0e5f0;
+}
+.modal .type-button {
+  border-color: #dce2f2;
+  color: #50609b;
+}
+.modal .type-button.selected {
+  background: #e9edff;
+}
+.modal .reader-content h2,
+.modal .poem-body {
+  color: #29334e;
+}
+.modal .text-link:hover {
+  color: #4864e8;
+}
+.modal .share-actions .button.secondary {
+  color: #4864c9;
+  border-color: #cdd5ef;
+  background: #f8f9ff;
+}
+.modal input {
+  background: #fff;
+  color: #29334e;
+  border-color: #d6ddef;
+}
+.modal h2 em {
+  color: #626ed2;
+}
+.modal > p:not(.eyebrow),
+.modal .field-help,
+.modal .install-hint {
+  color: #626b83;
+}
+.modal .field-error {
+  color: #9b3d63;
+}
+.modal .sheet-handle {
+  background: #c8cfe5;
+}
+.install-sheet > svg {
+  color: #6a7bce;
+}
+.install-sheet li {
+  color: #3d4969;
+}
+
+@media (min-width: 701px) and (max-width: 999px) {
+  .mobile-app {
+    max-width: 760px;
+  }
+  .app-topbar-inner {
+    width: min(100%, 760px);
+    padding-inline: 32px;
+  }
+  .app-home {
+    padding-top: 26px;
+  }
+  .app-home h1 {
+    font-size: 61px;
+  }
+  .app-story-card .portraits {
+    aspect-ratio: 600/330;
+  }
+  .mobile-app .page-width {
+    width: calc(100% - 64px);
+    max-width: 660px;
+  }
+}
+
+/* On a computer, the app opens into a real workspace instead of a phone frame. */
+@media (min-width: 1000px) {
+  .mobile-app.is-experience .voice-swipe-hint {
+    display: none;
+  }
+  .mobile-app {
+    max-width: 1180px;
+    padding-bottom: 24px;
+    min-height: 100svh;
+  }
+  .mobile-app main {
+    margin-left: 112px;
+    min-height: calc(100svh - 96px);
+  }
+  .app-topbar-inner {
+    width: 100%;
+    min-height: 82px;
+    padding: 14px 35px;
+  }
+  .app-topbar-brand {
+    gap: 12px;
+  }
+  .app-topbar-brand > span {
+    font-size: 29px;
+  }
+  .app-topbar-brand > svg {
+    width: 33px;
+    height: 39px;
+  }
+  .mobile-app .app-tabbar {
+    left: max(16px, calc((100vw - 1180px) / 2 + 14px));
+    top: 111px;
+    bottom: auto;
+    transform: none;
+    width: 86px;
+    padding: 7px;
+    border: 1px solid #dce1ef;
+    border-radius: 25px;
+    box-shadow: 0 7px 30px #34426b06;
+  }
+  .app-tabbar-track {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 80px);
+    padding: 3px;
+    gap: 0;
+  }
+  .app-tabbar-indicator {
+    width: calc(100% - 6px);
+    height: 80px;
+    bottom: auto;
+    transform: translateY(calc(var(--tab-index, 0) * 100%));
+    border-radius: 19px;
+  }
+  .app-tabbar-item {
+    min-height: 80px;
+    padding: 9px 2px;
+    gap: 8px;
+    border-radius: 19px;
+  }
+  .app-tabbar-item > span {
+    font-size: 9px;
+  }
+  .app-tabbar-item > svg {
+    width: 22px;
+    height: 22px;
+  }
+  .mobile-app .page-width {
+    width: calc(100% - 64px);
+    max-width: 960px;
+  }
+  .app-home {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.03fr);
+    grid-template-rows: auto auto auto auto auto auto;
+    column-gap: 36px;
+    width: calc(100% - 64px);
+    max-width: 960px;
+    padding: 45px 0 35px;
+    align-items: start;
+  }
+  .app-greeting {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    padding-top: 21px;
+  }
+  .app-kicker {
+    font-size: 10px;
+  }
+  .app-time {
+    font-size: 11px;
+    padding: 7px 10px;
+  }
+  .app-home h1 {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 22px;
+    font-size: clamp(58px, 5.2vw, 72px);
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .app-home-description {
+    grid-column: 1;
+    grid-row: 3;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 22px 0 27px;
+  }
+  .app-story-card {
+    grid-column: 2;
+    grid-row: 1 / 7;
+    align-self: center;
+    border-radius: 29px;
+  }
+  .app-story-card .portraits {
+    aspect-ratio: 600/360;
+  }
+  .app-story-card .art-caption {
+    padding: 22px 25px;
+  }
+  .app-story-card .art-caption p {
+    font-size: 26px;
+  }
+  .app-story-actions {
+    padding: 18px 20px 20px;
+  }
+  .app-story-meta {
+    font-size: 10px;
+    margin-bottom: 16px;
+  }
+  .mobile-app .app-start {
+    min-height: 57px;
+    font-size: 13px;
+  }
+  .app-shortcuts {
+    grid-column: 1;
+    grid-row: 4;
+    gap: 11px;
+    margin: 0;
+  }
+  .app-shortcuts > a {
+    min-height: 84px;
+    padding: 14px 13px;
+    gap: 10px;
+  }
+  .app-shortcuts strong {
+    font-size: 12px;
+  }
+  .app-shortcuts small {
+    font-size: 9px;
+  }
+  .app-install {
+    grid-column: 1;
+    grid-row: 5;
+    margin-top: 17px;
+    justify-content: flex-start;
+    font-size: 11px;
+  }
+  .app-home-privacy {
+    grid-column: 1;
+    grid-row: 6;
+    justify-content: flex-start;
+    font-size: 10px;
+    margin-top: 1px;
+  }
+  .mobile-app .interior-page {
+    padding-top: 36px;
+    padding-bottom: 35px;
+  }
+  .mobile-app .page-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+  .mobile-app .page-heading h1 {
+    font-size: 65px;
+    max-width: 520px;
+  }
+  .mobile-app .page-heading > p {
+    max-width: 265px;
+    font-size: 12px;
+    padding-bottom: 5px;
+  }
+  .mobile-app .collection-toolbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 20px 0;
+  }
+  .mobile-app .collection-toolbar > span {
+    font-size: 9px;
+    max-width: 170px;
+    line-height: 1.7;
+  }
+  .mobile-app .collection-toolbar > div {
+    display: flex;
+    gap: 7px;
+    width: auto;
+    flex: 1;
+    justify-content: flex-end;
+  }
+  .mobile-app .collection-toolbar .text-link {
+    font-size: 10px;
+    padding: 10px 11px;
+  }
+  .mobile-app .voice-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .mobile-app .poems-page .voice-card {
+    padding: 24px 22px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-app .poems-page .voice-card-top > span {
+    font-size: 8px;
+  }
+  .mobile-app .poems-page .voice-card-art {
+    position: static;
+    width: 82px;
+    height: 82px;
+    align-self: center;
+    margin: 20px 0 10px;
+  }
+  .mobile-app .poems-page .voice-theme {
+    margin: 14px 0 9px;
+    font-size: 9px;
+  }
+  .mobile-app .poems-page .voice-card h3 {
+    font-size: 30px;
+    line-height: 1.04;
+    max-width: none;
+  }
+  .mobile-app .poems-page .voice-read > span {
+    top: 20px;
+    right: 18px;
+  }
+  .mobile-app .collection-note {
+    max-width: 650px;
+    margin-top: 29px;
+  }
+  .mobile-app .small-invitation {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+  }
+  .mobile-app .small-invitation > p {
+    max-width: 410px;
+  }
+  .mobile-app.is-experience .experience-page {
+    padding-top: 29px;
+    min-height: calc(100svh - 107px);
+  }
+  .mobile-app.is-experience .stepper {
+    max-width: none;
+    gap: 13px;
+  }
+  .mobile-app.is-experience .stepper li {
+    font-size: 10px;
+  }
+  .mobile-app.is-experience .immersion-tools {
+    margin-top: 15px;
+  }
+  .mobile-app.is-experience .experience-heading {
+    text-align: center;
+    margin: 22px 0 32px;
+  }
+  .mobile-app.is-experience .experience-heading > .eyebrow {
+    justify-content: center;
+    font-size: 9px;
+  }
+  .mobile-app.is-experience .experience-heading h1 {
+    font-size: 64px;
+    margin-top: 19px;
+    margin-bottom: 18px;
+  }
+  .mobile-app.is-experience .experience-heading > p {
+    max-width: 630px;
+    margin-inline: auto;
+    font-size: 13px;
+  }
+  .mobile-app.is-experience .encounter-thread {
+    margin-top: 20px;
+    max-width: 430px;
+    gap: 14px;
+  }
+  .mobile-app.is-experience .encounter-thread > span {
+    font-size: 7px;
+  }
+  .mobile-app.is-experience .encounter-thread > svg {
+    width: 65px;
+    height: 22px;
+  }
+  .mobile-app.is-experience .scene-layout {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .mobile-app.is-experience .scene-note {
+    padding: 30px;
+  }
+  .mobile-app.is-experience .scene-context > p {
+    font-size: 13px;
+  }
+  .mobile-app.is-experience .scene-context blockquote {
+    font-size: 32px;
+  }
+  .mobile-app.is-experience .scene-context > p:last-child {
+    font-size: 26px;
+  }
+  .mobile-app.is-experience .scene-aside {
+    padding-left: 0;
+    padding-top: 51px;
+  }
+  .mobile-app.is-experience .scene-aside > svg {
+    top: 0;
+    width: 33px;
+    height: 38px;
+  }
+  .mobile-app.is-experience .scene-aside h2 {
+    font-size: 33px;
+  }
+  .mobile-app.is-experience .scene-aside > p {
+    font-size: 12px;
+    margin-top: 15px;
+  }
+  .mobile-app.is-experience .scene-aside > .gentle-note {
+    font-size: 11px;
+    margin-top: 17px;
+    padding-top: 13px;
+  }
+  .mobile-app.is-experience .stage-actions {
+    position: static;
+    bottom: auto;
+    border-top: 1px solid #9aace033;
+    background: transparent;
+    box-shadow: none;
+    padding: 24px 0 8px;
+    margin-top: 30px;
+    flex-wrap: nowrap;
+    gap: 25px;
+  }
+  .mobile-app.is-experience .stage-actions > span {
+    width: auto;
+    font-size: 11px;
+  }
+  .mobile-app.is-experience .stage-next {
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+  }
+  .mobile-app.is-experience .stage-next > span {
+    font-size: 10px;
+  }
+  .mobile-app.is-experience .stage-actions .button {
+    font-size: 12px;
+    min-width: 210px;
+  }
+  .mobile-app.is-experience .listening-layout {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 25px;
+  }
+  .mobile-app.is-experience .voice-tabs {
+    grid-template-columns: 1fr;
+    gap: 11px;
+    align-content: start;
+  }
+  .mobile-app.is-experience .voice-tabs > button {
+    min-height: 90px;
+    padding: 19px 17px;
+    flex-wrap: nowrap;
+    gap: 15px;
+    align-items: center;
+  }
+  .mobile-app.is-experience .voice-tabs > button > span:nth-child(2) {
+    width: auto;
+    order: initial;
+  }
+  .mobile-app.is-experience .voice-tabs .tab-number {
+    font-size: 27px;
+  }
+  .mobile-app.is-experience .voice-tabs > button strong {
+    font-size: 12px;
+  }
+  .mobile-app.is-experience .voice-tabs > button small {
+    font-size: 9px;
+  }
+  .mobile-app.is-experience .voice-tabs > button > svg {
+    width: 16px;
+    height: 16px;
+    margin-top: 0;
+  }
+  .mobile-app.is-experience .message-panel {
+    padding: 33px 35px;
+    min-height: 330px;
+  }
+  .mobile-app.is-experience .message-panel blockquote {
+    font-size: 28px;
+    line-height: 1.45;
+  }
+  .mobile-app.is-experience .message-bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .mobile-app.is-experience .choice-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+  }
+  .mobile-app.is-experience .choice-card {
+    padding: 23px;
+  }
+  .mobile-app.is-experience .choice-card > svg {
+    position: static;
+    align-self: center;
+    width: 74px;
+    height: 74px;
+    margin: 19px 0 10px;
+  }
+  .mobile-app.is-experience .choice-card h2 {
+    font-size: 30px;
+    max-width: none;
+    margin: 18px 0;
+  }
+  .mobile-app.is-experience .choice-card > p {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+  .mobile-app.is-experience .choice-card .choice-label {
+    font-size: 9px;
+  }
+  .mobile-app.is-experience .reflection-head {
+    max-width: 690px;
+    margin-inline: auto;
+  }
+  .mobile-app.is-experience .reflection-head h1 {
+    font-size: 66px;
+  }
+  .mobile-app.is-experience .reflection-head > p {
+    font-size: 13px;
+  }
+  .mobile-app.is-experience .reflection-question {
+    max-width: 750px;
+    margin: 33px auto;
+  }
+  .mobile-app.is-experience .reflection-question h2 {
+    font-size: 37px;
+  }
+  .mobile-app.is-experience .reflection-dialogue,
+  .mobile-app.is-experience .final-actions {
+    max-width: 750px;
+    margin-inline: auto;
+  }
+  .mobile-app .project-intro {
+    grid-template-columns: 0.8fr 1.4fr;
+    gap: 35px;
+    padding: 35px 0;
+  }
+  .mobile-app .project-big-number {
+    font-size: 130px;
+    gap: 22px;
+  }
+  .mobile-app .project-intro h2 {
+    font-size: 42px;
+  }
+  .mobile-app .project-intro p {
+    font-size: 13px;
+  }
+  .mobile-app .project-question {
+    font-size: 45px;
+    max-width: 850px;
+  }
+  .mobile-app .theory-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .mobile-app .theory-grid article {
+    padding: 28px;
+  }
+  .mobile-app .ethics-section {
+    padding: 31px;
+    gap: 25px;
+  }
+  .mobile-app .ethics-section h2 {
+    font-size: 38px;
+  }
+  .mobile-app .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+  .mobile-app .event-note {
+    flex-direction: row;
+    align-items: center;
+  }
+  .reader {
+    width: min(760px, calc(100% - 48px));
+    height: min(92dvh, 960px);
+    max-height: 92dvh;
+    border-radius: 26px;
+  }
+  .reader-scroll {
+    min-height: 0;
+    max-height: min(92dvh, 960px);
+  }
+  .reader-banner {
+    padding: 24px 43px;
+  }
+  .reader-content {
+    padding: 33px 55px 36px;
+  }
+  .reader .poem-body {
+    font-size: 25px;
+  }
+  .share-modal,
+  .install-sheet {
+    inset: 0;
+    margin: auto;
+    width: min(540px, calc(100% - 48px));
+    max-height: 90dvh;
+    border-radius: 28px;
+    padding: 39px 35px 32px;
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1140px) {
+  .app-home {
+    column-gap: 25px;
+    width: calc(100% - 48px);
+  }
+  .app-home h1 {
+    font-size: 58px;
+  }
+  .app-shortcuts {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+  .app-shortcuts > a {
+    min-height: 64px;
+  }
+  .mobile-app .collection-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .mobile-app .collection-toolbar > span {
+    max-width: none;
+  }
+  .mobile-app .collection-toolbar > div {
+    justify-content: flex-start;
+  }
+  .mobile-app .poems-page .voice-card {
+    padding: 22px 17px;
+  }
+  .mobile-app .poems-page .voice-card h3 {
+    font-size: 27px;
+  }
+  .mobile-app.is-experience .listening-layout {
+    grid-template-columns: 195px minmax(0, 1fr);
+    gap: 20px;
+  }
+  .mobile-app.is-experience .message-panel {
+    padding: 30px;
+  }
+  .mobile-app.is-experience .message-panel blockquote {
+    font-size: 26px;
+  }
+  .mobile-app.is-experience .choice-card {
+    padding: 20px 18px;
+  }
+  .mobile-app.is-experience .choice-card h2 {
+    font-size: 28px;
+  }
+  .mobile-app.is-experience .choice-card > p {
+    font-size: 19px;
+  }
+}
+
+@media print {
+  html,
+  body {
+    background: #fff;
+  }
+}

@@ -64,7 +64,7 @@ export function TouchFeedback() {
           x,
           y,
           host,
-          light: !!action.closest(".is-experience, .mobile-app"),
+          light: !!action.closest(".is-experience, .button.primary"),
         },
       ]);
       schedule(() => {

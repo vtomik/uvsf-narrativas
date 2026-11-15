@@ -275,12 +275,7 @@
 .immersion-controls button:focus-visible {
   outline-color: #e5c99c;
 }
-.immersion-controls .ambience-control {
-  --ambience-color: #d2ddc7;
-}
-.immersion-controls .ambience-indicator {
-  display: none;
-}
+
 .immersion-error {
   position: absolute;
   top: 100%;
@@ -965,9 +960,7 @@
   .immersion-controls > button:last-child span {
     display: none;
   }
-  .immersion-controls .ambience-button {
-    font-size: 9px;
-  }
+
   .memory-orbit {
     width: 650px;
     height: 650px;
@@ -1111,10 +1104,6 @@
 }
 @media (max-width: 370px) {
   .immersion-controls button,
-  .immersion-controls .ambience-button {
-    font-size: 8px;
-    padding: 8px;
-  }
   .is-experience .experience-heading h1 {
     font-size: 45px;
   }

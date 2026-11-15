@@ -8,11 +8,18 @@ export function changeScreen(
   direction: "forward" | "back" = "forward",
 ) {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const paused = !!document.querySelector(
-    '.experience-page[data-motion="paused"]',
-  );
-  if (!document.startViewTransition || reduced || paused) {
+  if (reduced) {
     update();
+    return;
+  }
+  if (!document.startViewTransition) {
+    flushSync(update);
+    document
+      .getElementById("main")
+      ?.animate?.(
+        [{ transform: "translateY(8px)" }, { transform: "translateY(0)" }],
+        { duration: 260, easing: "cubic-bezier(.16,.8,.24,1)" },
+      );
     return;
   }
   active?.skipTransition();

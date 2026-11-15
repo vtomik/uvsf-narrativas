@@ -1,6 +1,6 @@
 # Polifonía del cuidado
 
-Una aplicación web de Medicina Narrativa pensada primero para teléfonos, para el seminario de la Universidad de Valparaíso, Campus San Felipe, del 20 de noviembre de 2026. Cuatro pantallas con navegación inferior, ilustraciones originales en SVG y tipografías incluidas en la app.
+Una aplicación web de Medicina Narrativa pensada primero para teléfonos, para el seminario de la Universidad de Valparaíso, Campus San Felipe, del 20 de noviembre de 2026. Cuatro pantallas con navegación inferior en teléfono, distribución amplia con barra lateral en PC, ilustraciones originales en SVG y tipografías incluidas en la app.
 
 ## Qué incluye
 
@@ -14,11 +14,11 @@ Una aplicación web de Medicina Narrativa pensada primero para teléfonos, para 
 - Generación de QR en el navegador: permite ingresar la dirección publicada y descargar una imagen PNG para el stand.
 - Navegación por teclado, diálogos accesibles, contraste revisado y respeto por la preferencia de movimiento reducido.
 - Experiencia inmersiva con luz y partículas en movimiento, hilos que conectan las voces, colores según la perspectiva, transiciones entre escenas y una revelación final animada.
-- Ambiente sonoro suave y opcional, generado en el navegador: solo se activa con un clic. Controles para pausar el movimiento y usar pantalla completa cuando el navegador lo permite.
+- Paleta perla y cobalto, con un espacio azul nocturno para la experiencia. En teléfonos puedes deslizar horizontalmente los mensajes para cambiar de voz; las pestañas siguen disponibles para todos.
 
 No necesita servidor de aplicación, base de datos, claves ni registro. No usa analítica, cookies ni almacenamiento de elecciones. Los recursos y las fuentes se sirven desde el propio sitio.
 
-El sonido comienza apagado. Si el sistema tiene activado el movimiento reducido, las animaciones también comienzan pausadas. Los controles permiten cambiarlo durante la visita, sin guardar preferencias. Al ocultar la pestaña se suspenden el sonido y las animaciones; al salir del recorrido se libera el motor de audio.
+Las animaciones y transiciones se activan automáticamente; no hay controles para encenderlas ni motor de audio. Se respeta la preferencia de movimiento reducido del dispositivo y se pausa la animación ambiental al ocultar la pestaña. No se guardan preferencias.
 
 ## Publicarla sin programar
 
@@ -62,7 +62,7 @@ Para GitHub Pages se incluye un workflow. Tras subir el código a `main`, selecc
 npm test
 ```
 
-Compila la versión de producción y ejecuta 34 pruebas de Playwright en escritorio y celular. Verifica las tres elecciones y sus reflexiones, lectura completa, diálogos y foco, descarga del Word, generación y descarga del QR, impresión, navegación, recursos locales, ausencia de almacenamiento de respuestas, controles de movimiento y audio, anchos de 320–1440 px y accesibilidad automática con axe. Usa Chromium del sistema cuando está disponible; en otra máquina instala el navegador con `npx playwright install chromium`.
+Compila la versión de producción y ejecuta 40 pruebas de Playwright en escritorio y celular. Verifica las tres elecciones y sus reflexiones, lectura completa, diálogos y foco, descarga del Word, generación y descarga del QR, impresión, navegación, recursos locales, ausencia de almacenamiento de respuestas, animaciones automáticas, ausencia de audio, gestos de cambio de voz, distribución en PC, anchos de 320–1440 px y accesibilidad automática con axe. Usa Chromium del sistema cuando está disponible; en otra máquina instala el navegador con `npx playwright install chromium`.
 
 Para comparar **el texto exacto con el Word original**, con Python 3.10 o posterior (solo biblioteca estándar):
 
@@ -88,7 +88,7 @@ El script utiliza Playwright y el navegador Chromium para imprimir la web en A4.
 
 La navegación y el feedback táctil están en `src/AppNavigation.tsx` y `src/TouchFeedback.tsx`. El diseño de teléfono está en `src/phone-app.css`; `src/install.ts` gestiona la instalación opcional. Sus pruebas están en `tests/phone.spec.ts`.
 
-La atmósfera y sus controles están en `src/Immersion.tsx` y `src/immersion.css`. El audio sintetizado está en `src/Ambience.tsx`. Sus pruebas específicas están en `tests/immersion.spec.ts`.
+La atmósfera y sus controles están en `src/Immersion.tsx` y `src/immersion.css`. La nueva identidad visual está en `src/redesign.css` y las transiciones en `src/refinements.css`. Sus pruebas específicas están en `tests/immersion.spec.ts` y `tests/responsive-redesign.spec.ts`.
 
 | Archivo               | Función                                             |
 | --------------------- | --------------------------------------------------- |

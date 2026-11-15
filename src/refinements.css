@@ -1,0 +1,127 @@
+/* Motion supports the reading: brief reactions, automatic entrances, no switches. */
+.message-panel {
+  touch-action: pan-y;
+}
+.reader-progress {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 3px;
+  margin-bottom: -3px;
+  z-index: 4;
+  pointer-events: none;
+}
+.reader-progress:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #4864e8;
+  transform-origin: left;
+  transform: scaleX(var(--reading-progress, 0));
+  transition: transform 80ms linear;
+}
+.voice-swipe-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 10px;
+  line-height: 1.6;
+}
+::view-transition-old(root) {
+  animation: refined-out 180ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(root) {
+  animation: refined-in 300ms cubic-bezier(0.16, 0.8, 0.24, 1) both;
+}
+[data-screen-direction="back"]::view-transition-new(root) {
+  animation-name: refined-back;
+}
+@keyframes refined-in {
+  from {
+    opacity: 0;
+    transform: translate3d(16px, 0, 0) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+@keyframes refined-back {
+  from {
+    opacity: 0;
+    transform: translate3d(-16px, 0, 0) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+@keyframes refined-out {
+  to {
+    opacity: 0;
+    transform: translate3d(-7px, 0, 0);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .app-greeting,
+  .app-home h1,
+  .app-home-description,
+  .app-shortcuts {
+    animation: soft-enter 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .app-home h1 {
+    animation-delay: 40ms;
+  }
+  .app-home-description {
+    animation-delay: 80ms;
+  }
+  .app-shortcuts {
+    animation-delay: 120ms;
+  }
+  .app-story-card {
+    animation: soft-enter 620ms 80ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .voice-card,
+  .choice-card,
+  .app-shortcuts a {
+    transition:
+      transform 0.22s ease,
+      box-shadow 0.22s ease,
+      border-color 0.22s ease;
+  }
+  .app-shortcuts a:hover {
+    transform: translateY(-2px);
+  }
+  .choice-card.chosen {
+    animation: choice-settle 0.32s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .reader-banner svg {
+    animation: soft-enter 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  @keyframes soft-enter {
+    from {
+      transform: translate3d(0, 10px, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes choice-settle {
+    50% {
+      scale: 0.985;
+    }
+  }
+}
+@media (min-width: 1000px) {
+  .voice-swipe-hint {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}

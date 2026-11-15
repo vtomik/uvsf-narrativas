@@ -5,11 +5,11 @@
   overflow: hidden;
   pointer-events: none;
   contain: strict;
-  color: #6c8057;
+  color: #4864e8;
 }
 
 .tap-feedback-light {
-  color: #d4dcb1;
+  color: #e8eaff;
 }
 
 .tap-ripple {
