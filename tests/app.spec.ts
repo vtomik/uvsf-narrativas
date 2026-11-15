@@ -150,7 +150,7 @@ test("lector: versos íntegros, tamaño de texto, navegación y foco", async ({
     ).toBe(voice.body);
   }
   const downloadPromise = page.waitForEvent("download");
-  await page.getByRole("link", { name: "Word original" }).click();
+  await page.getByRole("link", { name: "Descargar Word" }).click();
   const download = await downloadPromise;
   expect(download.suggestedFilename()).toBe("poemas-originales.docx");
   expect(await download.failure()).toBeNull();

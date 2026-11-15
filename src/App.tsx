@@ -243,13 +243,6 @@ function PoemReader({
           <h2>{voice.title}</h2>
           <p className="reader-byline">Joel Jara · 2026</p>
           <PoemBody voice={voice} />
-          <div className="reader-note">
-            <ShieldCheck size={16} />
-            <p>
-              Texto íntegro del documento original. Se conservan los versos, la
-              puntuación y el título.
-            </p>
-          </div>
           <div className="reader-pagination">
             <button
               className="text-link"
@@ -522,8 +515,6 @@ function Poems({ onRead }: { onRead: (voice: Voice) => void }) {
           Una misma consulta. Tres voces que se cruzan
           <br />
           entre el miedo, el amor y la libertad.
-          <br />
-          <span className="subtle">Los poemas se reproducen íntegros.</span>
         </p>
       </div>
       <div className="collection-toolbar">
@@ -553,7 +544,7 @@ function Poems({ onRead }: { onRead: (voice: Voice) => void }) {
           </a>
           <a className="text-link" href={originalFile} download>
             <Download size={16} />
-            Word original
+            Descargar Word
           </a>
         </div>
       </div>
@@ -576,17 +567,6 @@ function Poems({ onRead }: { onRead: (voice: Voice) => void }) {
           ))}
         </div>
       )}
-      <div className="collection-note">
-        <ShieldCheck size={23} strokeWidth={1.3} />
-        <div>
-          <h3>La palabra, tal como fue escrita.</h3>
-          <p>
-            Conservamos los títulos, versos, puntuación y estrofas del documento
-            enviado. Las preguntas y reflexiones de la experiencia acompañan los
-            poemas y no forman parte de ellos.
-          </p>
-        </div>
-      </div>
       <div className="small-invitation">
         <p>¿Qué pasa cuando las tres voces se encuentran?</p>
         <a className="button primary" href="#/experiencia">
@@ -872,7 +852,6 @@ function Experience({ onRead }: { onRead: (voice: Voice) => void }) {
                   <MessageLines text={active.message} />
                 </blockquote>
                 <div className="message-bottom">
-                  <span>Fragmento textual del poema</span>
                   <button className="text-link" onClick={() => onRead(active)}>
                     Leer el poema completo <ArrowUpRight size={16} />
                   </button>
