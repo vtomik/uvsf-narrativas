@@ -10,7 +10,7 @@ Una aplicación web de Medicina Narrativa pensada primero para teléfonos, para 
 - Respuesta visual suave al tocar controles y transiciones cortas entre pantallas, con alternativa sin movimiento.
 - Recorrido participativo: escena ficticia → tres mensajes no enviados → elección de una voz → reflexión específica y preguntas para conversar.
 - Los **tres poemas íntegros** de Joel Jara, extraídos del Word original: 60 versos, títulos, puntuación y estrofas conservados.
-- Lector con tamaño de texto ampliable y lectura continua dentro de la app.
+- Lector con tamaño de texto ampliable, lectura continua y fanzine descargable con los poemas de Joel Jara: edición A5 de cuatro páginas y versión A4 para doblar.
 - Generación de QR en el navegador: permite ingresar la dirección publicada y descargar una imagen PNG para el stand.
 - Navegación por teclado, diálogos accesibles, contraste revisado y respeto por la preferencia de movimiento reducido.
 - Pantalla inicial de carga, pausas visuales breves entre escenas y revelación gradual de la pregunta, sin porcentajes de progreso ficticios. Las pausas se omiten con movimiento reducido.
@@ -64,7 +64,7 @@ Para GitHub Pages se incluye un workflow. Tras subir el código a `main`, selecc
 npm test
 ```
 
-Compila la versión de producción y ejecuta pruebas de Playwright en escritorio y celular. Verifica las tres elecciones y sus reflexiones, lectura completa, diálogos y foco, ausencia de botones de descarga documental e instalación, generación y descarga del QR, impresión, navegación, recursos locales, ausencia de almacenamiento de respuestas, animaciones automáticas, ausencia de audio, gestos de cambio de voz, distribución en PC, anchos de 320–1440 px y accesibilidad automática con axe. Usa Chromium del sistema cuando está disponible; en otra máquina instala el navegador con `npx playwright install chromium`.
+Compila la versión de producción y ejecuta pruebas de Playwright en escritorio y celular. Verifica las tres elecciones y sus reflexiones, lectura completa, diálogos y foco, descarga del fanzine y ausencia de enlaces al Word, al seminario y a instalación, generación y descarga del QR, impresión, navegación, recursos locales, ausencia de almacenamiento de respuestas, animaciones automáticas, ausencia de audio, gestos de cambio de voz, distribución en PC, anchos de 320–1440 px y accesibilidad automática con axe. Usa Chromium del sistema cuando está disponible; en otra máquina instala el navegador con `npx playwright install chromium`.
 
 Para comparar **el texto exacto con el Word original**, con Python 3.10 o posterior (solo biblioteca estándar):
 
@@ -76,7 +76,7 @@ La comparación incluye contexto, títulos, estrofas, versos y los fragmentos us
 
 ## Fanzine PDF
 
-`public/materiales/fanzine.pdf` es la versión imprimible de la colección. Para regenerarla después de un cambio deliberado de contenido o diseño de impresión:
+`public/materiales/fanzine.pdf` contiene cuatro páginas A5: portada y un poema por página, con la paleta cobalto, las tipografías y los trazos del sitio. `public/materiales/fanzine-imprimir-a4.pdf` dispone las mismas páginas en dos caras A4 (4|1 y 2|3), listas para imprimir y doblar. Para regenerarla después de un cambio deliberado de contenido o diseño de impresión:
 
 ```sh
 npm run build
@@ -84,7 +84,9 @@ npm run export:fanzine
 npm run build
 ```
 
-El script utiliza Playwright y el navegador Chromium para imprimir la web en A4. La última compilación incorpora el PDF actualizado en `dist/`. La interfaz de la app se centra en la lectura y no incluye controles de descarga documental ni de impresión del fanzine.
+El script utiliza Playwright y Chromium, espera las fuentes y verifica que los versos no se superpongan con el pie de página. Genera PDF con texto seleccionable, fuentes incorporadas y etiquetas de accesibilidad. La última compilación incorpora ambos PDF en `dist/`; sus descargas aparecen en Los poemas.
+
+Para armar el cuadernillo, usa la versión A4: papel A4 horizontal, tamaño real (100 %), doble cara con giro por el borde corto y una página del PDF por cara. Dobla la hoja por la mitad. No actives nuevamente el modo folleto ni dos páginas por hoja: la versión A4 ya está ordenada.
 
 ## Archivos importantes
 
@@ -98,7 +100,7 @@ La atmósfera y sus controles están en `src/Immersion.tsx` y `src/immersion.css
 | `src/App.tsx`         | Páginas, recorrido, reflexiones, lector y QR.       |
 | `src/Artwork.tsx`     | Ilustraciones vectoriales originales.               |
 | `src/styles.css`      | Diseño y adaptación a diferentes pantallas.         |
-| `src/print.css`       | Composición A4 del fanzine.                         |
+| `src/print.css`       | Composición A5 del fanzine.                         |
 | `public/materiales/`  | Word original, documento del seminario y fanzine.   |
 | `tests/app.spec.ts`   | Pruebas de comportamiento y accesibilidad.          |
 

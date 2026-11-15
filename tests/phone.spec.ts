@@ -87,7 +87,7 @@ test("los controles de teléfono siguen accesibles sobre la barra inferior", asy
   }
 });
 
-test("las cuatro pantallas conservan la navegación sin instalar ni descargar documentos", async ({
+test("las cuatro pantallas conservan la navegación y solo ofrecen el fanzine en la colección", async ({
   page,
 }) => {
   await page.goto("/");
@@ -117,12 +117,29 @@ test("las cuatro pantallas conservan la navegación sin instalar ni descargar do
         links
           .map((link) => link.getAttribute("href") || "")
           .filter((href) =>
-            /\/materiales\/(?:seminario\.pdf|fanzine\.pdf|poemas-originales\.docx)(?:[?#]|$)/.test(
+            /\/materiales\/(?:seminario\.pdf|poemas-originales\.docx)(?:[?#]|$)/.test(
               href,
             ),
           ),
       );
     expect(documentLinks).toEqual([]);
+    await expect(page.locator("main a[download]")).toHaveCount(
+      label === "Poemas" ? 2 : 0,
+    );
+    if (label === "Poemas") {
+      await expect(
+        page.getByRole("link", {
+          name: "Descargar fanzine PDF",
+          exact: true,
+        }),
+      ).toBeVisible();
+      await expect(
+        page.getByRole("link", {
+          name: "Imprimir y doblar en A4",
+          exact: true,
+        }),
+      ).toBeVisible();
+    }
   }
 });
 

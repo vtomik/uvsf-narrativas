@@ -26,6 +26,7 @@ import { AuthorFoundations } from "./AuthorFoundations";
 import { UniversityLogo } from "./UniversityLogo";
 import { VoiceArt } from "./Artwork";
 import Home from "./Home";
+import PrintFanzine from "./PrintFanzine";
 import { AppNavigation, AppTopBar } from "./AppNavigation";
 import { TouchFeedback } from "./TouchFeedback";
 import { changeScreen } from "./transitions";
@@ -41,6 +42,7 @@ import {
 import "./redesign.css";
 import "./refinements.css";
 import "./encounter.css";
+import "./fanzine-download.css";
 
 type Voice = (typeof collection.voices)[number];
 const voices = collection.voices;
@@ -432,8 +434,35 @@ function Poems({ onRead }: { onRead: (voice: Voice) => void }) {
             <Expand size={16} />
             {continuous ? "Ver tarjetas" : "Lectura continua"}
           </button>
+          <a
+            className="text-link"
+            href={`${import.meta.env.BASE_URL}materiales/fanzine.pdf`}
+            download="polifonia-del-cuidado-fanzine.pdf"
+          >
+            <Download size={16} /> Descargar fanzine PDF
+          </a>
         </div>
       </div>
+      <aside
+        className="fanzine-download-note"
+        aria-label="Impresión del fanzine"
+      >
+        <p>
+          Cuatro páginas A5 con los poemas de Joel Jara, listas para llevar
+          contigo.
+        </p>
+        <a
+          href={`${import.meta.env.BASE_URL}materiales/fanzine-imprimir-a4.pdf`}
+          download="polifonia-del-cuidado-fanzine-a4.pdf"
+          className="text-link"
+        >
+          <Download size={15} /> Imprimir y doblar en A4
+        </a>
+        <small>
+          Para el cuadernillo: A4 horizontal, tamaño real y doble cara con giro
+          por el borde corto. Dobla la hoja por la mitad.
+        </small>
+      </aside>
       {continuous ? (
         <div className="continuous-poems">
           {voices.map((v, i) => (
@@ -1115,32 +1144,6 @@ function Project() {
           Entrar en la experiencia <ArrowUpRight size={18} />
         </a>
       </div>
-    </div>
-  );
-}
-
-function PrintFanzine() {
-  return (
-    <div className="print-fanzine" aria-hidden="true">
-      <header>
-        <h1>Lo que no cabe en la ficha clínica</h1>
-        <p>Polifonía del cuidado · Joel Jara · 2026</p>
-        <h2>{collection.title}</h2>
-        {collection.context.map((p) => (
-          <p key={p}>{p}</p>
-        ))}
-      </header>
-      {voices.map((v) => (
-        <article key={v.id}>
-          <h2>{v.originalHeading}</h2>
-          <PoemBody voice={v} />
-        </article>
-      ))}
-      <footer>
-        Escena ficticia. Una propuesta de Medicina Narrativa · Universidad de
-        Valparaíso, Campus San Felipe · Benjamín Corradi, Joel Jara y Benjamín
-        Pinto.
-      </footer>
     </div>
   );
 }

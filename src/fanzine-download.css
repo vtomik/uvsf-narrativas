@@ -1,0 +1,24 @@
+.mobile-app .fanzine-download-note {
+  margin: 18px 0 26px;
+  padding: 20px 22px;
+  border: 1px solid #dce2f0;
+  border-radius: 16px;
+  background: #fff;
+}
+.fanzine-download-note p {
+  color: #435170;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0 0 6px;
+}
+.fanzine-download-note > a {
+  color: #3651b6;
+}
+.fanzine-download-note small {
+  display: block;
+  max-width: 650px;
+  color: #626b83;
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 5px;
+}

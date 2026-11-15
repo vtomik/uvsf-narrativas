@@ -149,10 +149,45 @@ test("lector: versos íntegros, tamaño de texto, navegación y foco", async ({
       ).join("\n\n"),
     ).toBe(voice.body);
   }
-  await expect(page.locator("main a[download]")).toHaveCount(0);
+  await expect(page.locator("main a[download]")).toHaveCount(2);
+  await expect(
+    page.getByRole("link", { name: "Descargar fanzine PDF", exact: true }),
+  ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Imprimir fanzine", exact: true }),
   ).toHaveCount(0);
+});
+
+test("el fanzine se descarga como PDF listo para conservar e imprimir", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/#/poemas");
+  for (const variant of [
+    {
+      label: "Descargar fanzine PDF",
+      filename: "polifonia-del-cuidado-fanzine.pdf",
+    },
+    {
+      label: "Imprimir y doblar en A4",
+      filename: "polifonia-del-cuidado-fanzine-a4.pdf",
+    },
+  ]) {
+    const link = page.getByRole("link", {
+      name: variant.label,
+      exact: true,
+    });
+    const href = await link.evaluate((node: HTMLAnchorElement) => node.href);
+    const response = await request.get(href);
+    expect(response.ok()).toBe(true);
+    expect(response.headers()["content-type"]).toContain("application/pdf");
+    expect((await response.body()).subarray(0, 5).toString()).toBe("%PDF-");
+    const downloadPromise = page.waitForEvent("download");
+    await link.click();
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toBe(variant.filename);
+    expect(await download.failure()).toBeNull();
+  }
 });
 
 test("QR con enlace público, validación y descarga", async ({ page }) => {
@@ -300,6 +335,29 @@ test("el paquete estático funciona al publicarse en una subcarpeta", async ({
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
       "Mientras todavía",
     );
+    const fanzine = page.getByRole("link", {
+      name: "Descargar fanzine PDF",
+      exact: true,
+    });
+    const fanzineHref = await fanzine.evaluate(
+      (node: HTMLAnchorElement) => node.href,
+    );
+    expect(new URL(fanzineHref).pathname).toBe(
+      "/muestra/materiales/fanzine.pdf",
+    );
+    const pdf = await page.request.get(fanzineHref);
+    expect(pdf.ok()).toBe(true);
+    expect(pdf.headers()["content-type"]).toContain("application/pdf");
+    expect((await pdf.body()).subarray(0, 5).toString()).toBe("%PDF-");
+    const bookletHref = await page
+      .getByRole("link", { name: "Imprimir y doblar en A4", exact: true })
+      .evaluate((node: HTMLAnchorElement) => node.href);
+    expect(new URL(bookletHref).pathname).toBe(
+      "/muestra/materiales/fanzine-imprimir-a4.pdf",
+    );
+    const booklet = await page.request.get(bookletHref);
+    expect(booklet.ok()).toBe(true);
+    expect((await booklet.body()).subarray(0, 5).toString()).toBe("%PDF-");
     await page.reload();
     await page.getByRole("button", { name: "Leer su poema" }).first().click();
     await expect(page.getByRole("dialog")).toBeVisible();
@@ -331,13 +389,16 @@ test("versiones pequeñas y medianas conservan las tres opciones", async ({
   }
 });
 
-test("la impresión incluye el contexto y los tres poemas completos", async ({
+test("el fanzine impreso tiene portada con autor y los tres poemas completos", async ({
   page,
 }) => {
   await page.goto("/#/poemas");
   await page.emulateMedia({ media: "print" });
   await expect(page.locator(".app-shell")).not.toBeVisible();
   await expect(page.locator(".print-fanzine")).toBeVisible();
+  const pages = page.locator(".print-fanzine .fanzine-page");
+  await expect(pages).toHaveCount(4);
+  await expect(pages.first()).toContainText("Joel Jara");
   for (const voice of collection.voices) {
     expect(
       (
